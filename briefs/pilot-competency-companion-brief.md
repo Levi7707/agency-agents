@@ -1,8 +1,8 @@
-# Project Brief v2 — "Crosscheck": The Pilot Competency-Continuity & Career Companion
+# Project Brief v3 — "Crosscheck": The Pilot Competency-Continuity & Career Companion
 
-> **Document type:** Master project brief (business strategy → method → product → UI/UX)
-> **Working product name:** **Crosscheck** *(placeholder — see §3.4)*
-> **Status:** Draft v2.0 — integrates the two authoritative source documents (see below)
+> **Document type:** Master project brief (brand → business strategy → method → product → UI/UX)
+> **Working product name:** **Crosscheck** *(recommended — final name pending your pick from the §4.7 shortlist)*
+> **Status:** Draft v3.0 — adds full Brand Foundations (§4); integrates the two authoritative source documents (see below)
 > **Date:** 2026-06-29
 > **Primary purpose:** The single source of truth and deep-context reference for AI design agents generating high-fidelity UI/UX screens in Figma. A downstream agent should be able to read *this brief alone* and understand the full picture — strategy, the underlying training method, the complete feature system, information architecture, screens, and visual language.
 
@@ -11,14 +11,14 @@
 > 2. **Competency Continuity Method (v3)** — the scientific/operational method: Operational Training Units (OTUs), EBT double-entry currentness, exposure model, recurrence pools, scoring, training-pattern generation, currentness engine.
 > Where this brief and a source document differ on *product mechanics*, the source document wins. This brief adds the strategy, positioning, IA, and visual/design specification on top.
 
-> **Key product decisions locked for v2:**
+> **Key product decisions locked:**
 > - **Scope:** MVP = the competency-continuity training engine. "Career companion" extras (documents, expiry, logbook, career prep) are **later phases**, not MVP.
 > - **Aircraft:** **A320 short-haul content**, but the UI is designed as a **type-agnostic shell** that visibly generalizes to other types later.
 > - **Method visibility:** **Operational/simple UI.** Pilots see concrete *actions* ("fuel leak", "de-icing") and the *9-competency* view. The method's internal machinery (OTUs, exposure categories, recurrence pools, scoring) stays **backend** — never shown as jargon.
 > - **First Figma batch:** the **core loop** (see §11).
 
 > **How to read this brief:**
-> - **§1–§4** = the *why* (problem, market, strategy). Context.
+> - **§1–§4** = the *why* (problem, market, brand & strategy). §4 is the brand foundation — name, story, values, voice — that all visual/copy decisions inherit from.
 > - **§5** = the *method* (the core mechanic every screen ultimately serves). Essential.
 > - **§6** = the *full feature system* (what exists in the product).
 > - **§7–§11** = the *how it looks and works* — the actionable design specification. Treat §8 (Screens) and §9 (Design System) as build instructions.
@@ -30,7 +30,7 @@
 1. [Executive Summary](#1-executive-summary)
 2. [The Problem & Why This Exists](#2-the-problem--why-this-exists)
 3. [Market & Competitive Landscape](#3-market--competitive-landscape)
-4. [Strategic Positioning & Business Model](#4-strategic-positioning--business-model)
+4. [Brand Foundations & Identity](#4-brand-foundations--identity)
 5. [The Core Mechanic — Competency Continuity Method](#5-the-core-mechanic--competency-continuity-method)
 6. [The Full Feature System](#6-the-full-feature-system)
 7. [Users, Personas & Journeys](#7-users-personas--journeys)
@@ -119,24 +119,101 @@ Formal airline training is **episodic**; operations are **continuous**. Between 
 
 ---
 
-## 4. Strategic Positioning & Business Model
+## 4. Brand Foundations & Identity
 
-### 4.1 Positioning statement
+> Built from the founder's inputs: **origin** = lived experience as a pilot *and* watching peers quietly struggle *and* a recognized industry gap; **brand role** = **"the quiet edge"** (the private advantage against complacency); **naming tone** = **credible aviation term**. These foundations are upstream of all UI/UX — name, voice, values and color all flow from here, so the design stays coherent with the vision.
 
-> **For** professional pilots **who** worry about staying sharp on rare-critical actions and being ready for their next check, **Crosscheck is** a personal competency-continuity companion **that** schedules short, science-based retrieval of exactly the actions line flying leaves dormant, graded against the EBT competencies airlines use — **unlike** logbook apps that only record the past, **Crosscheck** is forward-looking, method-driven, and operationally real.
+### 4.1 Mission
 
-### 4.2 Brand personality
+Keep every professional pilot **quietly, continuously ready** — sharp on the rare-critical actions that line flying lets fade — between every check.
 
-| Trait | Design meaning |
-|-------|----------------|
-| **Professional & credible** | Serious tool for aviators. No clip-art planes. Precision, trust, correct terminology. |
-| **Calm under pressure** | Uncluttered, confident, never alarmist — even when flagging a weak area. |
-| **Coaching, not nagging** | "Your KNO profile is slipping — today we'll run a fuel-leak scenario." Never "Train KNO." Always a path forward. |
-| **Precise** | Exact numbers, dates, statuses. Tabular figures. Pilots live by precision. |
+### 4.2 Vision
 
-**Voice:** concise, confident, plain-language, aviation-literate, encouraging without being saccharine.
+A world where no pilot is ever caught rusty on the things that matter most: where maintaining your own competency between checks is as normal and unremarkable as a preflight scan — and where "competency continuity" becomes a standard layer of professional airmanship, owned by the pilot.
 
-### 4.3 Business model (proposal — not in source docs; confirm)
+### 4.3 Brand values
+
+| Value | What it means | How it shows up |
+|-------|---------------|-----------------|
+| **Competence over completion** | Readiness is proven by *retention + performance*, never by "finishing" content | Milestones earned on sustained recall, not lessons completed; honest currentness, not vanity progress |
+| **Quiet confidence** | Understated, precise; the work speaks for itself — no hype, no fear-mongering | Calm UI, restrained copy, no exclamation marks or alarm-bells; an edge you don't have to announce |
+| **Truth you can trust** | Validated content only, sourced and auditable; honest about what we are and aren't | No AI-invented content; source references kept; the "between approved events" disclaimer respected |
+| **Respect for the pilot** | Their time, expertise, privacy and autonomy are sacred | 90-second paths; override everything; incognito/privacy controls; never patronizing |
+| **Forward-looking** | We build readiness; we don't just record the past | Currentness & retrieval lead; logging is deferred and secondary |
+| **Calm, never alarmist** | Safety-serious like the cockpit — composed under pressure | Weak areas surfaced as coaching, not warnings; amber/red used precisely, never theatrically |
+
+### 4.4 Brand archetype & personality — "The Quiet Edge"
+
+**Archetype:** a **Sage** (mastery, knowledge, truth) expressed with deliberate **restraint** — closer to a trusted, unshowy guardian of your standards than a loud coach or a chirpy buddy. The brand is the *private advantage* a serious professional keeps: it makes you better without making a show of it.
+
+| We ARE | We are NOT |
+|--------|------------|
+| Precise, composed, quietly confident | Loud, gamified-for-its-own-sake, hype-y |
+| A peer-level professional who respects your expertise | A lecturing instructor or a cartoon mascot |
+| Understated — the edge you don't talk about | Boastful, badge-spammy, motivational-poster |
+| Honest, even when the news is "you're rusty" | Flattering or falsely reassuring |
+| Calm under pressure, like a good flight deck | Alarmist, anxious, cluttered |
+
+> **Design implication:** "Quiet edge" is a *visual discipline*, not just copy. Restraint everywhere — generous space, muted dark surfaces, one confident accent, precise numerals, motion that's brief and earned. If a screen feels loud, it's off-brand.
+
+### 4.5 Positioning statement
+
+> **For** professional pilots **who** worry about staying sharp on rare-critical actions and being ready for their next check, **[the app] is** a personal competency-continuity companion **that** schedules short, science-based retrieval of exactly the actions line flying leaves dormant, graded against the EBT competencies airlines use — **unlike** logbook apps that only record the past, **it** is forward-looking, method-driven, and operationally real.
+
+### 4.6 Brand story
+
+**Long form:**
+
+> There's a truth most pilots don't say out loud: months can pass without ever touching the things that could one day save the aircraft — and you. Line flying rehearses the routine every sector. The rare-critical — engine failure after V1, a fuel leak in the cruise, windshear on rotation — sits dormant, waiting for a simulator detail or, worse, the real day.
+>
+> The founder felt it first-hand. After the type rating, the systems knowledge that had been razor-sharp started to quietly fade — and there was a private unease before every recurrent sim that no logbook could fix. Talking to other pilots, it turned out everyone carried the same quiet worry, and nobody had a real way to deal with it.
+>
+> Meanwhile the whole industry had moved on — to Evidence-Based and Competency-Based Training, built around the competencies that actually keep flights safe. But that progress lived *inside the airline*. There was nothing the individual pilot could own to maintain their own edge between the formal events.
+>
+> So we built it. Not another logbook. A continuity layer between checks — short, spaced, science-based retrieval of exactly the actions that are fading, measured against the competencies that matter. It doesn't replace your training, your manuals, or your operator's programme. It keeps the quiet edge between them.
+>
+> Because the best pilots aren't the loudest in the room. They're the ones who are simply, quietly, always ready.
+
+**Short form (for store listings / landing hero):**
+
+> Line flying keeps you sharp on the routine — and lets the rare-critical fade. [The app] is a personal competency-continuity companion that quietly keeps you ready on the things you almost never see, between every check. Not a logbook. Your edge.
+
+### 4.7 Name — recommendation & shortlist *(decision pending your pick)*
+
+You chose **credible aviation term** + explore-fresh-then-pick. Below is the shortlist, all real cockpit/ATC language, scored against the brief. **Pick one and I'll lock it through the whole document.**
+
+| Candidate | Why it fits "the quiet edge" | Watch-outs |
+|-----------|------------------------------|------------|
+| **Crosscheck** ⭐ *(my recommendation)* | The instrument *crosscheck* is the continuous, unglamorous scan that keeps a pilot ahead — literally the product's mechanic. Aviation-credible, quietly disciplined, works as a verb ("did your crosscheck?"). | Two syllables/compound; check availability in app stores |
+| **Scan** | The *instrument scan* — the foundational habit of continuously checking. Short, modern, brandable, perfectly on-concept. | Generic word → harder trademark/SEO; "scan" apps (document scanners) exist |
+| **Maintain** | ATC phraseology ("maintain…") *and* the literal job: competency *maintenance*. Calm, understated, conceptually exact. | Common verb → trademark/discoverability harder |
+| **Vigil** | Quiet watchfulness against complacency — the "quiet edge" distilled. Distinctive, ownable. | Less strictly an aviation term |
+| **Trim** | "In trim" = optimally balanced and set; calm, precise, quietly competent. | Subtle; meaning may not be obvious to non-pilots |
+
+> **Conceptual anchor regardless of name:** **airmanship** — the holistic competence and judgment the product builds. Useful for the tagline/story even if it isn't the app name.
+>
+> **Checks to run before final lock (for whichever you pick):** trademark search (relevant classes, target markets), Apple App Store / Google Play name availability, `.com`/`.app` domain, social handles, and international/linguistic connotation check (the app is multi-jurisdiction).
+>
+> **Until you choose, this brief continues to use "Crosscheck" as the working name.** Other sections use "[the app]" where the name is brand-critical copy, so a swap is clean.
+
+### 4.8 Taglines (options)
+
+- **Brand line:** *"The quiet edge."*
+- **Functional:** *"Stay sharp between checks."*
+- Alternatives: *"Always a step ahead."* · *"Ready, quietly."* · *"Sharp on what you never see."* · *"Competence, maintained."* · *"Your edge between checks."*
+
+### 4.9 Voice & tone
+
+Concise · confident · calm · peer-level · aviation-literate · coaching not nagging · never hype. We talk to a professional like a respected colleague — direct about weak areas, always with a path forward, never alarmist or saccharine.
+
+| Do | Don't |
+|----|-------|
+| "Your engine-failure-after-V1 recall is fading. 3-minute drill?" | "⚠️ WARNING! You're not current!! Train NOW!!!" |
+| "You're current on the essentials. One soft spot: de-icing decision." | "Amazing job, champion! 🎉 You're crushing it!!" |
+| "Your KNO profile is slipping — today: a fuel-leak scenario." | "Time to train KNO." *(abstract, not operational)* |
+| "Done. De-icing back to current; PSD trending up." | "Lesson 4 of 12 complete." *(completion, not competence)* |
+
+### 4.10 Business model (proposal — not in source docs; confirm)
 
 **Freemium + single paid "Pro" tier.** Freemium maximizes top-of-funnel in a trust-sensitive niche and seeds the future B2B trojan horse (pilots already using it when we sell to their airline). One Pro tier avoids confusing pricing. One-time purchase rejected — value is ongoing (continuous retrieval), so recurring revenue matches recurring value and funds content/QA (the credibility moat).
 
@@ -148,11 +225,7 @@ Formal airline training is **episodic**; operations are **continuous**. Between 
 
 > Priced below LogTen/ForeFlight to signal "complement, not replacement" and lower trial friction. **Design implication:** paywall screens must sell *value* (the analytics, the AI curator, the offline vault) — never a bare feature checklist.
 
-### 4.4 Naming
-
-Lead: **Crosscheck** (real cockpit term — verification, scanning for what's off, readiness). Alternatives: **Ready Room, Brief, Sharp, Proficient, Currentness, The Loop.** Brief uses "Crosscheck" throughout.
-
-### 4.5 Go-to-market (summary)
+### 4.11 Go-to-market (summary)
 
 Beachhead: **A320 first officers & cadets in/after type rating** — highest anxiety about knowledge decay and the next sim, most digitally native, tight word-of-mouth cohorts. Channels: pilot communities (r/flying, Discords, forums), flight-school/type-rating partnerships, aviation influencers, ATO referrals. Hook: *"Walk into your next sim knowing you're ready — even on the things you never see on the line."*
 
@@ -553,6 +626,15 @@ Premium, dark-first, precision-instrument-inspired, but **modern and restrained*
 - **Imagery:** no stock clip-art planes. Prefer abstract instrument/horizon/HUD motifs, subtle gradients, data-viz. Premium, restrained.
 - **Motion (prototype notes):** gauges/radar animate in (count-up, draw-on); celebrate streaks / "all current" / badge-earned briefly and tastefully — never childish. Provide reduce-motion variants.
 
+### 9.7 Logo & brand-mark direction (expresses "the quiet edge")
+
+The identity should feel like a precision instrument, not a consumer toy — restraint is the brand (§4.4).
+- **Wordmark:** clean technical sans (Inter/SF-adjacent), tight tracking, lowercase or small-caps; quietly confident, no italics, no "swoosh".
+- **Mark concept directions** (explore 2–3 in Figma): (a) an abstracted **instrument-scan / crosscheck path** — a minimal cross or scanning reticle; (b) a **single precise reference point / datum** on a subtle horizon line; (c) a **9-point motif** echoing the competency radar. All geometric, single-weight, monochrome-capable.
+- **Color:** mark works in `--brand-primary` cyan on dark and in mono (white/black); a faint cyan glow is the only "shine" permitted.
+- **Avoid:** literal aircraft silhouettes, wings/roundels, gradients-as-decoration, anything that reads as a budget aviation clip-art brand.
+- **App icon:** the mark on `--bg-base`/Pure-Black; legible at 1× and instantly recognizable in a crew-room glance.
+
 ---
 
 ## 10. Interaction, Adaptive UI, States & Accessibility
@@ -661,4 +743,4 @@ Premium, dark-first, precision-instrument-inspired, but **modern and restrained*
 
 ---
 
-*End of brief v2.0. Integrates the Product Functionality Specification and the Competency Continuity Method (v3). Open proposals to confirm: product name, exact pricing, and content-sourcing/validation plan (the #1 risk). Ready to hand to UX Research, UI Design, and Figma-generation agents — starting with the Batch-1 core-loop screens (§11).*
+*End of brief v3.0. Adds full Brand Foundations (§4: mission, vision, values, archetype, story, name shortlist, taglines, voice) and logo direction (§9.7); integrates the Product Functionality Specification and the Competency Continuity Method (v3). Open decisions for you: (1) **pick the final name** from the §4.7 shortlist; (2) confirm pricing (§4.10); (3) confirm the content-sourcing/validation plan (the #1 risk, §13.3). Once the name is locked, the brief is fully sufficient to hand to Brand, UX Research, UI Design, and Figma-generation agents — starting with the Batch-1 core-loop screens (§11).*
