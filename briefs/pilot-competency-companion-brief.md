@@ -1,8 +1,8 @@
-# Project Brief v3 — "Crosscheck": The Pilot Competency-Continuity & Career Companion
+# Project Brief v3 — "OnCourse": The Pilot Competency-Continuity & Career Companion
 
 > **Document type:** Master project brief (brand → business strategy → method → product → UI/UX)
-> **Working product name:** **Crosscheck** *(recommended — final name pending your pick from the §4.7 shortlist)*
-> **Status:** Draft v3.0 — adds full Brand Foundations (§4); integrates the two authoritative source documents (see below)
+> **Product name:** **OnCourse** *(selected; may change later, but any change is name-only — branding/colors/voice/story stay fixed. See §4.7.)*
+> **Status:** Draft v3.1 — name locked (OnCourse); full Brand Foundations (§4); integrates the two authoritative source documents (see below)
 > **Date:** 2026-06-29
 > **Primary purpose:** The single source of truth and deep-context reference for AI design agents generating high-fidelity UI/UX screens in Figma. A downstream agent should be able to read *this brief alone* and understand the full picture — strategy, the underlying training method, the complete feature system, information architecture, screens, and visual language.
 
@@ -47,19 +47,19 @@
 
 ### 1.1 The one-paragraph pitch
 
-**Crosscheck** keeps professional pilots *competent between checks*, not just *current on paper*. Line flying naturally rehearses some actions every sector (cockpit prep, briefings, approaches) while leaving rare-critical ones dormant for months (engine failure after V1, fuel leak, windshear escape, evacuation). Crosscheck closes that **exposure gap** with short, spaced, scenario-based micro-training — scheduled by a method built on Evidence-Based Training (EBT) competencies and memory science. It learns each pilot's weak spots, schedules the right retrieval at the right time, and shows two honest readiness pictures: *which actions you're rusty on* and *which underlying competencies are slipping*. It is a pilot's private "personal training department in their pocket." Over time it grows into a full career companion (documents, logbook, career prep), but the MVP is the training engine.
+**OnCourse** keeps professional pilots *competent between checks*, not just *current on paper*. Line flying naturally rehearses some actions every sector (cockpit prep, briefings, approaches) while leaving rare-critical ones dormant for months (engine failure after V1, fuel leak, windshear escape, evacuation). OnCourse closes that **exposure gap** with short, spaced, scenario-based micro-training — scheduled by a method built on Evidence-Based Training (EBT) competencies and memory science. It learns each pilot's weak spots, schedules the right retrieval at the right time, and shows two honest readiness pictures: *which actions you're rusty on* and *which underlying competencies are slipping*. It is a pilot's private "personal training department in their pocket." Over time it grows into a full career companion (documents, logbook, career prep), but the MVP is the training engine.
 
 ### 1.2 The core insight (drives every design decision)
 
-The whole competitor market *logs the past* (LogTen, ForeFlight, CrewLounge — hours, currency, endorsements). Crosscheck answers the forward-looking question pilots actually lose sleep over: **"Am I still sharp on the things I almost never do — and where am I weak?"**
+The whole competitor market *logs the past* (LogTen, ForeFlight, CrewLounge — hours, currency, endorsements). OnCourse answers the forward-looking question pilots actually lose sleep over: **"Am I still sharp on the things I almost never do — and where am I weak?"**
 
 It does this with a real method (the **Competency Continuity Method**, §5): not a generic question bank, but training generated from **mapped operational actions/events**, scheduled by **how often line flying, the sim, and recurrent training already refresh each one**, and graded against the **9 EBT competencies**.
 
-> **Design implication:** Crosscheck is a **readiness & coaching** product — closer to a beautifully-made adaptive learning app (Duolingo-class daily habit) crossed with a flight-training mindset — **not** a logbook or a spreadsheet. If a Figma frame looks like data entry, it's wrong.
+> **Design implication:** OnCourse is a **readiness & coaching** product — closer to a beautifully-made adaptive learning app (Duolingo-class daily habit) crossed with a flight-training mindset — **not** a logbook or a spreadsheet. If a Figma frame looks like data entry, it's wrong.
 
 ### 1.3 The critical disclaimer (must be respected in UI copy)
 
-Per the source method: Crosscheck is a **competency-continuity and cognitive-reinforcement layer between approved recurrent training events.** It does **not** replace an operator's approved training programme, manuals, SOPs, regulatory training, simulator checking, or instructor-led assessment. The UI must never imply formal qualification, certification, or regulatory currentness. *(See §13 risk table — content credibility is the #1 risk.)*
+Per the source method: OnCourse is a **competency-continuity and cognitive-reinforcement layer between approved recurrent training events.** It does **not** replace an operator's approved training programme, manuals, SOPs, regulatory training, simulator checking, or instructor-led assessment. The UI must never imply formal qualification, certification, or regulatory currentness. *(See §13 risk table — content credibility is the #1 risk.)*
 
 ### 1.4 MVP vs. full vision
 
@@ -103,11 +103,11 @@ Formal airline training is **episodic**; operations are **continuous**. Between 
 | **Airline/ATO training (EBT/CBTA)** | Boeing/Airbus EBT, CAE Rise, internal LMS | Competency-based recurrent training & assessment | B2B only, locked in the airline, not consumer-grade, pilot keeps no personal copy |
 | **Study / ground-school** | Sporty's, ATPL banks | Exam prep for one milestone | One-and-done; nothing for *career-long maintenance* |
 
-**Crosscheck occupies the empty intersection:** the *competency framework* of airline EBT systems + the *spaced retrieval* of study apps, delivered as a *consumer-grade, career-long, personally-owned* app — which does not exist today for the individual pilot.
+**OnCourse occupies the empty intersection:** the *competency framework* of airline EBT systems + the *spaced retrieval* of study apps, delivered as a *consumer-grade, career-long, personally-owned* app — which does not exist today for the individual pilot.
 
 ### 3.2 Competitive snapshot
 
-| Competitor | Strength | Price (~2025) | Why Crosscheck wins |
+| Competitor | Strength | Price (~2025) | Why OnCourse wins |
 |------------|----------|---------------|---------------------|
 | **LogTen Pro** | Logging accuracy, 120k+ pilots, airline-trusted | $80–130/yr | We don't compete on logging; we own *continuity & competency* |
 | **ForeFlight Logbook** | Bundled with dominant EFB | Bundled $130–390/yr | Locked to ForeFlight; ours is standalone, focused, affordable |
@@ -158,7 +158,7 @@ A world where no pilot is ever caught rusty on the things that matter most: wher
 
 ### 4.5 Positioning statement
 
-> **For** professional pilots **who** worry about staying sharp on rare-critical actions and being ready for their next check, **[the app] is** a personal competency-continuity companion **that** schedules short, science-based retrieval of exactly the actions line flying leaves dormant, graded against the EBT competencies airlines use — **unlike** logbook apps that only record the past, **it** is forward-looking, method-driven, and operationally real.
+> **For** professional pilots **who** worry about staying sharp on rare-critical actions and being ready for their next check, **OnCourse is** a personal competency-continuity companion **that** schedules short, science-based retrieval of exactly the actions line flying leaves dormant, graded against the EBT competencies airlines use — **unlike** logbook apps that only record the past, **it** is forward-looking, method-driven, and operationally real.
 
 ### 4.6 Brand story
 
@@ -178,23 +178,21 @@ A world where no pilot is ever caught rusty on the things that matter most: wher
 
 > Line flying keeps you sharp on the routine — and lets the rare-critical fade. [The app] is a personal competency-continuity companion that quietly keeps you ready on the things you almost never see, between every check. Not a logbook. Your edge.
 
-### 4.7 Name — recommendation & shortlist *(decision pending your pick)*
+### 4.7 Name — decision: **OnCourse** ✅
 
-You chose **credible aviation term** + explore-fresh-then-pick. Below is the shortlist, all real cockpit/ATC language, scored against the brief. **Pick one and I'll lock it through the whole document.**
+The name is **OnCourse**. Working/final for now; it may change later — but **any future change is name-only: branding, colors, voice, archetype and story do not change.**
 
-| Candidate | Why it fits "the quiet edge" | Watch-outs |
-|-----------|------------------------------|------------|
-| **Crosscheck** ⭐ *(my recommendation)* | The instrument *crosscheck* is the continuous, unglamorous scan that keeps a pilot ahead — literally the product's mechanic. Aviation-credible, quietly disciplined, works as a verb ("did your crosscheck?"). | Two syllables/compound; check availability in app stores |
-| **Scan** | The *instrument scan* — the foundational habit of continuously checking. Short, modern, brandable, perfectly on-concept. | Generic word → harder trademark/SEO; "scan" apps (document scanners) exist |
-| **Maintain** | ATC phraseology ("maintain…") *and* the literal job: competency *maintenance*. Calm, understated, conceptually exact. | Common verb → trademark/discoverability harder |
-| **Vigil** | Quiet watchfulness against complacency — the "quiet edge" distilled. Distinctive, ownable. | Less strictly an aviation term |
-| **Trim** | "In trim" = optimally balanced and set; calm, precise, quietly competent. | Subtle; meaning may not be obvious to non-pilots |
+Why it fits:
+- **Credible aviation phraseology** — "on course" means tracking the correct route/path; the on-course indication is a core navigation reference. Insider-credible without being obscure.
+- **"Quiet edge" meaning** — being *on course* is calm, in control, on the right path — exactly the brand's understated confidence (§4.4).
+- **Double meaning** — a training *course*; quietly reinforces the learning/continuity purpose.
+- **Brandable & tagline-ready** — one word, easy to say and spell, and it fits the brand lines directly: **"Stay on course."**
 
-> **Conceptual anchor regardless of name:** **airmanship** — the holistic competence and judgment the product builds. Useful for the tagline/story even if it isn't the app name.
+> **Conceptual anchor regardless of name:** **airmanship** — the holistic competence the product builds; useful for story/tagline.
 >
-> **Checks to run before final lock (for whichever you pick):** trademark search (relevant classes, target markets), Apple App Store / Google Play name availability, `.com`/`.app` domain, social handles, and international/linguistic connotation check (the app is multi-jurisdiction).
+> **Checks to run before public launch (recommended):** trademark search in relevant classes/markets — **note:** education/training products using "OnCourse / OnCourse Learning" names exist, so verify clearance specifically in the aviation-training class and your target jurisdictions; Apple App Store / Google Play name availability; `.com` / `.app` domain + social handles; and an international/linguistic connotation check (multi-jurisdiction product).
 >
-> **Until you choose, this brief continues to use "Crosscheck" as the working name.** Other sections use "[the app]" where the name is brand-critical copy, so a swap is clean.
+> Earlier shortlisted candidates (Scan, Maintain, Vigil, Trim, and the original working name) are preserved in this document's version history.
 
 ### 4.8 Taglines (options)
 
@@ -284,7 +282,7 @@ Every completed task updates **two** ledgers:
 
 Example: a *de-icing scenario* (tagged PSD primary; KNO/PRO/SAW/COM/WLM secondary) — completing it lifts de-icing **action** currentness *and* sends positive signals to those **competencies**; failing/hesitating sends weaker signals, weighted by result.
 
-> **Design implication:** Crosscheck needs **two complementary readiness views** — an **Action Currentness** view (operational, the one pilots live in: a list/map of actions with due status) and a **Competency Currentness** view (the 9-competency radar/analytics). My v1 "competency radar" was only the second; the first is equally important and arguably more prominent for pilots.
+> **Design implication:** OnCourse needs **two complementary readiness views** — an **Action Currentness** view (operational, the one pilots live in: a list/map of actions with due status) and a **Competency Currentness** view (the 9-competency radar/analytics). My v1 "competency radar" was only the second; the first is equally important and arguably more prominent for pilots.
 
 ### 5.5 Exposure model & categories (backend — drives scheduling)
 
@@ -743,4 +741,4 @@ The identity should feel like a precision instrument, not a consumer toy — res
 
 ---
 
-*End of brief v3.0. Adds full Brand Foundations (§4: mission, vision, values, archetype, story, name shortlist, taglines, voice) and logo direction (§9.7); integrates the Product Functionality Specification and the Competency Continuity Method (v3). Open decisions for you: (1) **pick the final name** from the §4.7 shortlist; (2) confirm pricing (§4.10); (3) confirm the content-sourcing/validation plan (the #1 risk, §13.3). Once the name is locked, the brief is fully sufficient to hand to Brand, UX Research, UI Design, and Figma-generation agents — starting with the Batch-1 core-loop screens (§11).*
+*End of brief v3.1. Name locked: **OnCourse** (§4.7). Includes full Brand Foundations (§4: mission, vision, values, archetype, story, taglines, voice) and logo direction (§9.7); integrates the Product Functionality Specification and the Competency Continuity Method (v3). Remaining open decisions for you: (1) confirm pricing (§4.10); (2) confirm the content-sourcing/validation plan (the #1 risk, §13.3); (3) run the name-clearance checks in §4.7 before public launch. The brief is now fully sufficient to hand to Brand, UX Research, UI Design, and Figma-generation agents — starting with the Batch-1 core-loop screens (§11).*
