@@ -2,7 +2,7 @@
 
 > **Document type:** Master project brief (brand → business strategy → method → product → UI/UX)
 > **Product name:** **OnCourse** *(selected; may change later, but any change is name-only — branding/colors/voice/story stay fixed. See §4.7.)*
-> **Status:** Draft v4.1 — pricing decided (free-first → subscription + B2B licensing, §4.10); content pipeline & phased personalization (§5.9); phased roadmap (§13.1); tech-stack constraints (§14); exercise-format spec (§15); design-ready sample-content kit (§16). Name locked (OnCourse); full Brand Foundations (§4). Integrates four source documents (below).
+> **Status:** Draft v4.2 — content governance & pilot-review model (§5.10) + Admin Review console (§6.7); data-privacy stance decided (§14); restrained-gamification guardrail (§6.4); name-clearance findings (§4.7); pricing free-first (§4.10); content pipeline & phased personalization (§5.9); phased roadmap (§13.1); tech stack (§14); exercise formats (§15); sample-content kit (§16). Name: OnCourse; full Brand Foundations (§4). Integrates four source documents (below).
 > **Date:** 2026-06-29
 > **Primary purpose:** The single source of truth and deep-context reference for AI design agents generating high-fidelity UI/UX screens in Figma. A downstream agent should be able to read *this brief alone* and understand the full picture — strategy, the underlying training method, the complete feature system, information architecture, screens, and visual language.
 
@@ -67,7 +67,9 @@ It does this with a real method (the **Competency Continuity Method**, §5): not
 
 ### 1.3 The critical disclaimer (must be respected in UI copy)
 
-Per the source method: OnCourse is a **competency-continuity and cognitive-reinforcement layer between approved recurrent training events.** It does **not** replace an operator's approved training programme, manuals, SOPs, regulatory training, simulator checking, or instructor-led assessment. The UI must never imply formal qualification, certification, or regulatory currentness. *(See §13 risk table — content credibility is the #1 risk.)*
+Per the source method: OnCourse is a **competency-continuity and cognitive-reinforcement layer between approved recurrent training events.** It does **not** replace an operator's approved training programme, manuals, SOPs, regulatory training, simulator checking, or instructor-led assessment. The UI must never imply formal qualification, certification, or regulatory currentness.
+
+> **Hard UI requirement (founder-directed):** the "never replaces official documentation or airline training" message must be **clearly and visibly stated in the app** — not buried. Surface it at **onboarding** (a brief, dismissible acknowledgement), keep it permanently accessible in **About/Settings**, and reference it near content where appropriate. It is a trust cornerstone, not fine print. *(See §5.10 for content governance and §13 risk table — content credibility is the #1 risk.)*
 
 ### 1.4 MVP vs. full vision
 
@@ -197,9 +199,13 @@ Why it fits:
 - **Brandable & tagline-ready** — one word, easy to say and spell, and it fits the brand lines directly: **"Stay on course."**
 
 > **Conceptual anchor regardless of name:** **airmanship** — the holistic competence the product builds; useful for story/tagline.
->
-> **Checks to run before public launch (recommended):** trademark search in relevant classes/markets — **note:** education/training products using "OnCourse / OnCourse Learning" names exist, so verify clearance specifically in the aviation-training class and your target jurisdictions; Apple App Store / Google Play name availability; `.com` / `.app` domain + social handles; and an international/linguistic connotation check (multi-jurisdiction product).
->
+
+**Name-clearance findings (research completed — act before public/commercial launch):**
+- **Collision found:** **"OnCourse Systems for Education"** is an established K-12 education/school-management brand with live App Store apps ("OnCourse Systems", "OnCourse Walkthrough", "OnCourse Connect"). Because OnCourse-the-pilot-app is a *learning/training* product, this is an **adjacent trademark class (education/training software) — a real conflict risk**, and a bare "OnCourse" App Store name is likely already crowded.
+- **Aviation space is clear:** no pilot/aviation app named "OnCourse" was found — within aviation the name reads as ownable.
+- **Recommendation:** keep **OnCourse** as the brand, but (a) have a **trademark attorney** assess the education-class overlap in target jurisdictions; (b) plan a **distinguishing App Store name** (e.g. *"OnCourse — Pilot Training"* / *"OnCourse Aviation"*) since the plain name is contested; (c) secure a distinct **domain/handles** (e.g. `getoncourse.app` / `flyoncourse.com` — `oncourse.com` is almost certainly taken) ; (d) keep a **fallback name** ready given the collision. *(You've noted the name can change later with **zero branding/color impact** — §header — so this is low-risk to carry forward.)*
+- **Sources:** [OnCourse Systems (App Store)](https://apps.apple.com/us/app/oncourse-systems/id6575387171) · [OnCourse Systems for Education](https://app.oncoursesystems.com/) · [OnCourse Walkthrough (App Store)](https://apps.apple.com/us/app/oncourse-walkthrough/id1136709462)
+
 > Earlier shortlisted candidates (Scan, Maintain, Vigil, Trim, and the original working name) are preserved in this document's version history.
 
 ### 4.8 Taglines (options)
@@ -392,6 +398,20 @@ Parallel "Revision Pools" database  ──►  pushed into the app's dedicated s
 > - Early-release **status is light** (path progress, pool completion, streak, due count). **Do not** design the full competency radar as an early-release screen — mark it a **later-phase** view.
 > - Keep the **self-directed Train** mode visibly separate from the engine-pushed Flight Plan, so "what OnCourse tells me to do" ≠ "what I chose to poke at."
 
+### 5.10 Content sourcing, review & the trust promise *(founder-directed — the credibility moat)*
+
+Content credibility is the #1 risk (§13.3). The governance model:
+
+- **Source of truth:** all content derives from **official aircraft-manufacturer documentation** — **Airbus first (A320)**, with **Boeing and other types later**. As the product scales toward becoming an industry standard, the plan is to **acquire licensed access to official sources**. *(Design/legal note: never present manufacturer text verbatim as the app's own; keep source references per item; secure appropriate content rights — see §13.3 IP row.)*
+- **Generation:** questions/exercises are **RAG-generated** from that source, in the fixed formats (§15).
+- **Human review is mandatory — every single item.** Even though generation is automated, **professional pilots manually review every question before it can reach a user.** No unreviewed item ships.
+- **Admin Review console (internal tool):** admins use a review mode that shows *unverified* generated questions with a **Correct / False / To rewrite** control; "to rewrite" and "false" route back to admins (us) for correction/removal. Only **Correct-marked** items enter the revision-pool database. *(This is a separate internal surface — see §6.7 and screen #50; not part of the consumer app, lower design priority than the core loop.)*
+- **Item lifecycle:** `generated → in review → (correct | rewrite | rejected) → approved → in pool`. Store reviewer + timestamp for auditability.
+- **In-app trust signal:** because every question is pilot-reviewed, surface a quiet **"Reviewed by professional pilots"** signal (e.g., on feedback screens / content info), and keep the **source reference** visible. This is a genuine differentiator vs. generic AI question banks — show it, don't shout it (per the "quiet edge" brand).
+- **Safety-net (later):** an optional user **"flag this question"** control feeds items back to the review queue.
+
+> **Design implications:** (1) the consumer app must show the **"reviewed by pilots"** trust cue and honor the **"never replaces official docs/training"** disclaimer (§1.3); (2) the **Admin Review console** is its own internal product surface to design later (§6.7).
+
 ---
 
 ## 6. The Full Feature System
@@ -420,13 +440,15 @@ Parallel "Revision Pools" database  ──►  pushed into the app's dedicated s
 - **Choice Architecture Defaults:** always compute one best next action; expose as the Hero Tile; allow override.
 
 ### 6.4 Retention & Behavioral Psychology
+
+> **Founder-directed guardrail: keep gamification restrained.** OnCourse must **not feel like a game** (it's a serious professional tool) — but it must not be **boring** either. The core motivator is **daily lesson/session completion → streak** ("you need to train every day"). Celebration is tasteful and quiet (per the "quiet edge" brand), never confetti-heavy or childish. **De-scope the points *currency*/marketplace** (see below).
+
 - **Contextual Smart Notifications:** opt-in, low-frequency, only in allowed windows; deep-link to a one-tap session (same engine as the Hero Tile) with a "why" + easy mute/snooze.
-- **Training Streak:** two modes — **Daily** (1 qualifying action/day) and **Cadence** (pilot-optimized: e.g. 4 sessions/week → counts consecutive weeks hitting target). Pilot schedules vary, so cadence matters.
-- **Streak Guard (Freezes)** + **Streak Guard Marketplace:** spend earned points or pre-schedule a vacation to protect a streak (points-sink for the gamification currency).
-- **Relative Leaderboards:** compare to ~10 peers, not millions (winnable).
-- **Collaborative Quests:** features requiring a partner (social accountability).
-- **Value Realization Screens:** weekly "time/knowledge gained" reports (reason to pay).
-- **Verifiable Milestones:** shareable, verification-backed mastery badges (e.g. "A320 Bleed Air") — granted only on **sustained retention (SRS) + performance (accuracy + coverage)**, not on content completion. Links to a public verification page (scope/criteria/date) trustable by peers or training orgs.
+- **Training Streak (primary loop):** earned by **completing a lesson/session** — two modes: **Daily** (1 qualifying session/day) and **Cadence** (pilot-optimized: e.g. 4 sessions/week → consecutive weeks hitting target). Pilot schedules vary, so cadence matters.
+- **Streak Guard (Freezes):** protect a streak via freezes **earned through consistency** or a pre-scheduled vacation. **No points currency / no marketplace** — this keeps it non-gamey. *(The former "Streak Guard Marketplace" + points economy is **de-scoped**.)*
+- **Verifiable Milestones:** quiet, verification-backed mastery badges (e.g. "A320 Bleed Air") — granted only on **sustained retention + performance**, not content completion. Optional public verification page. *(Later phase.)*
+- **Value Realization Screens:** occasional "knowledge maintained / progress" summary — informative, not boastful. *(Later phase.)*
+- **Social (Leaderboards, Collaborative Quests, Activity Ticker):** **later-phase and to be validated** — competing publicly on competency may feel unprofessional to some pilots; if built, keep it optional and low-key.
 
 ### 6.5 Control, Privacy & Trust
 - **Privacy Zones:** geofence to mute notifications at home/work.
@@ -447,6 +469,17 @@ Parallel "Revision Pools" database  ──►  pushed into the app's dedicated s
 - **AI Refinement Toggle:** quick feedback to correct/dismiss AI suggestions (retrain to preference).
 - **State Persistence Hand-off:** real-time task sync across phone / desktop / wearable — start a micro-quiz on phone, finish on laptop.
 - *Marked Not Applicable in spec:* Multimodal Input "how", Interest-Based Content Skinning, Narrative Roles, Commute-Detection Sync, Venue-Aware Content. **Do not design these for v2.**
+
+### 6.7 Admin Review Console *(internal tool — separate from the consumer app)*
+
+The engine that guarantees content credibility (§5.10). A **web/admin surface** (not shipped to pilots) where reviewers see RAG-generated, *unverified* questions and clear each one:
+- **Queue view:** unverified items with source reference, exercise type (§15), competency tag, and the generated content.
+- **Per-item action:** **Correct** (approve → enters pool DB) · **False** (reject) · **To rewrite** (route back to admins for editing).
+- **Editing:** admins modify stems/answers/explanations; edited items re-enter the queue.
+- **Audit:** reviewer identity + timestamp stored; approved items carry the "reviewed by pilots" flag surfaced in-app.
+- **Access:** admin-only account/role (distinct from pilot accounts).
+
+> **Design priority:** *lower than the consumer core loop* — design after the V1/V2 pilot-facing batch. But it's a real product surface (likely desktop-first) and belongs in the roadmap.
 
 ---
 
@@ -575,26 +608,27 @@ Early release uses **4 tabs + a center FAB** (not 5) — cleaner, and it matches
 33. 🔒 Single competency detail (e.g. KNO) — trend, linked weak actions, recommended drills
 34. 🔒 Next-check context — optional date of next recurrent/sim; pre-check focus list
 
-**Retention / gamification** *(mostly V2–V3)*
-35. ⭐ Streak screen — daily vs cadence mode, calendar, freezes *(V1)*
-36. Streak Guard Marketplace — spend points / schedule vacation *(V3; needs points economy — undefined, §13.3)*
-37. Relative Leaderboard (~10 peers) *(V3; validate fit with pro audience)*
-38. Collaborative Quest (partner) *(V3)*
-39. Milestones / verifiable badges — earned + verification page mock *(V2)*
-40. Progressive Investment Tracker — skill tree / knowledge map *(V3)*
-41. Value Realization — weekly report *(V2)*
+**Retention / gamification** *(restrained — §6.4)*
+35. ⭐ Streak screen — daily vs cadence mode, calendar, freezes (earned via consistency; **no points/marketplace**) *(V1)*
+36. Milestones / verifiable badges — earned on sustained retention + performance *(V2)*
+37. Value Realization — occasional progress summary (informative, not boastful) *(V2)*
+38. 🔒 Social (Leaderboard / Quests / Activity Ticker) — *later phase; validate fit with pro audience; optional & low-key if built*
 
 **Profile, trust & system**
-42. Profile home — identity, aircraft chip (A320), streak, milestones, active path
-43. **AI & Trust Hub** — AI on/off, signals used, privacy boundaries, reset; reachable from every Why? *(V2)*
-44. Settings — auth/passkey, aircraft, notifications + windows, theme (incl. Pure Black / High Contrast), haptics, Eco-Mode, Focus Mode, Incognito Pause, Privacy Zones, State-Persistence/devices
-45. Training Preferences — Learning Style Profile (formats + explanation depth)
-46. 🔒 Subscription / paywall — *later phase; **not** in early release (launch is 100% free, §4.10)*
-47. Offline Vault — downloaded content manager *(V2)*
-48. "Coming soon" / roadmap teaser — Documents · Logbook · Career
+39. Profile home — identity, aircraft chip (A320), streak, milestones, active path
+40. **AI & Trust Hub** — AI on/off, signals used, privacy boundaries, reset; **"reviewed by pilots" + data-privacy promise** surfaced here; reachable from every Why? *(V2)*
+41. Settings — auth/passkey, aircraft, notifications + windows, theme (incl. Pure Black / High Contrast), haptics, Eco-Mode, Focus Mode, Incognito Pause, Privacy Zones, **data export/delete**, State-Persistence/devices
+42. Training Preferences — Learning Style Profile (formats + explanation depth)
+43. ⭐ **Disclaimer acknowledgement** — brief onboarding notice: "OnCourse never replaces official documentation or airline training" (also permanent in About) *(§1.3)*
+44. 🔒 Subscription / paywall — *later phase; **not** in early release (launch is 100% free, §4.10)*
+45. Offline Vault — downloaded content manager *(V2)*
+46. "Coming soon" / roadmap teaser — Documents · Logbook · Career
+
+**Internal (not the consumer app)** 🔧
+47. 🔧 **Admin Review Console** — queue of unverified generated questions; per-item **Correct / False / To rewrite** + edit; audit trail (§6.7). Desktop-first; design after the consumer core loop.
 
 **Global states** (design as variants, not separate flows) ⭐
-49. ⭐ Empty ("Your path starts here" / no pool due yet), Loading (skeletons; shimmer-in), Error, **Offline** (calm chip; daily loop still works from vault), Success/celebration (streak milestone, pool complete, badge earned), **Low-Load mode** active variant, **cold-start** (§16).
+48. ⭐ Empty ("Your path starts here" / no pool due yet), Loading (skeletons; shimmer-in), Error, **Offline** (calm chip; daily loop still works from vault), Success/celebration (streak milestone, pool complete, badge earned), **Low-Load mode** active variant, **cold-start** (§16).
 
 ### 8.3 Flight Plan / Predictive Hero Tile — detailed spec (most important screen) ⭐
 
@@ -798,15 +832,15 @@ Phases run **Concept → V0 → V1 → V2 → V3**, grouped by **value bundle** 
 
 | Risk | L | I | Mitigation |
 |------|---|---|------------|
-| **Content credibility** — pilots are unforgiving of wrong/dated content | High | High | Source from validated bank only (no AI invention); keep source references per OTU; **mandatory pilot/expert validation**; store confidence + separate inferred vs pilot-scored; user flagging; clear disclaimers (§1.3) |
-| **"Just another logbook" perception** | Med | High | Relentlessly forward-looking UX; lead with currentness; logbook deferred to Phase 2 |
-| **Method credibility / over-claiming** | Med | High | Position as a *continuity layer between approved events*; never imply certification/regulatory currentness; auditable "why" |
-| **Scheduling accuracy** (intervals are approximations, not validated law) | Med | Med | Make pools/intervals auditable & adjustable; pilot validation; periodic review vs feedback/fleet data |
-| **Engagement decay** (knowledge apps fade) | Med | High | Tie retrieval to *real rare-critical risk* + cadence streaks + adaptive relevance to the pilot's exposure profile |
+| **Content credibility** — pilots are unforgiving of wrong/dated content | High | High | Official manufacturer source only, no AI invention; **every question human-reviewed by professional pilots** via the Admin Review console before it ships (§5.10, §6.7); source reference per item; "reviewed by pilots" trust cue; user flag-to-review safety net; clear disclaimers (§1.3) |
+| **Source licensing / IP** — manufacturer manuals are copyrighted | Med | High | Never reproduce manufacturer text verbatim as our own; generate original questions; **acquire licensed access to official sources as the product scales** (§5.10); keep counsel involved before public/commercial launch |
+| **"Just another logbook" perception** | Med | High | Relentlessly forward-looking UX; lead with the path/pools; logbook deferred to later phase |
+| **Method credibility / over-claiming** | Med | High | Position as a *continuity layer between approved events*; **prominent in-app "never replaces official docs/airline training" notice** (§1.3); never imply certification/regulatory currentness |
+| **Scheduling accuracy** (intervals are approximations, not validated law) | Med | Med | Make intervals auditable & adjustable; pilot validation; periodic review vs feedback |
+| **Engagement decay** (knowledge apps fade) | Med | High | Tie retrieval to *real rare-critical risk* + daily-completion streaks + relevance to the pilot's path |
+| **Over-gamification** (feels unprofessional) | Med | Med | Restrained gamification (§6.4); no points marketplace; quiet celebration; social features later & optional |
 | **Cross-jurisdiction / multi-type complexity** | High | Med | A320-first + type-agnostic shell; ICAO/EASA 9-competency universal core; jurisdiction as config later |
-| **Data sensitivity / trust** | Med | High | Privacy-first (Privacy Zones, Incognito Pause, Offline Vault), AI Trust Hub, clear data ownership; vault secure by design |
-
----
+| **Data sensitivity / trust** | Med | High | **Weakness/performance data private to the pilot's account; employers/airlines never see individual data** (B2B = anonymized/aggregated only); privacy-by-default, encryption in transit + at rest, data export/delete, Incognito Pause; promise surfaced in onboarding + AI & Trust Hub (§14) |
 
 ---
 
@@ -817,8 +851,11 @@ Phases run **Concept → V0 → V1 → V2 → V3**, grouped by **value bundle** 
 - **Hybrid mobile:** **Capacitor** (web tech in a native shell) — *not* pure native Swift/Kotlin. Design must render well via web engine and still feel native (respect iOS conventions, safe areas, momentum scroll, haptics F043).
 - **Backend / platform:** **Firebase** — Auth, **Cloud Firestore** (data lives in the cloud), Remote Config (feature flags / phased rollout, e.g. First-Session Choice, Choice-Architecture Defaults), Storage (Offline Vault content).
 - **Secure storage:** **Capacitor secure storage** for sensitive local data.
-- **Design implications:**
-  - **Data-trust posture (fills earlier gap):** because currentness/weak-area data is sensitive to this audience, the UI must make the promise explicit — *this is the pilot's private data; not shared with an employer/airline.* Add reassurance copy in onboarding + a clear statement in the AI & Trust Hub (F032). (Confirm final data-ownership/retention policy — still an open decision.)
+- **Data-trust posture (decided — founder-directed):**
+  - **A pilot's weakness/performance data is private to their own account.** Full stop.
+  - **Employers/airlines never see individual data.** When the B2B/ATO product arrives, operators receive **only anonymized/aggregated** fleet-level insight — never a named pilot's weak areas. This is a non-negotiable trust cornerstone (many pilots won't touch a tool their airline could monitor them with).
+  - **Recommended handling (my answer to your open 2b):** keep cloud sync (Firestore) for cross-device continuity, **but** pair it with — encryption in transit **and** at rest; **privacy-by-default** (minimal collection, no third-party ad tracking); **pilot owns their data** with in-app **export + delete**; Incognito Pause for un-logged sessions. Surface the promise plainly at **onboarding** and in the **AI & Trust Hub**.
+- **Other design implications:**
   - **Offline-first for the daily loop:** Offline Vault (F035) preloads due pools; the session + streak must work with no connectivity, syncing on reconnect.
   - **Remote Config** means screens may be flag-gated — design graceful on/off states for flagged features.
 
@@ -875,4 +912,4 @@ Phases run **Concept → V0 → V1 → V2 → V3**, grouped by **value bundle** 
 
 ---
 
-*End of brief v4.1. Name: **OnCourse** (§4.7). Pricing decided: **free-first → subscription + B2B licensing** (§4.10). Includes the content pipeline & phased personalization (§5.9), phased release plan (§13.1), tech stack (§14), exercise-format spec (§15), and a design-ready sample-content kit (§16); integrates all four source documents. Remaining open decisions for you: (1) content-sourcing/validation plan (§13.3, #1 risk); (2) data-ownership/privacy policy wording (§14); (3) points economy for Streak-Guard Marketplace (§13.3); (4) name-clearance checks (§4.7). The brief is now sufficient to hand to Brand, UX Research, UI Design, and Figma-generation agents — first Figma batch = the **V1/V2 core loop** (onboarding → path assignment → Flight Plan/Hero Tile → revision pool → session + feedback → light Progress), all **unlocked/free**, per §11.*
+*End of brief v4.2. Name: **OnCourse** (§4.7). The four previously-open items are now resolved from founder input: **content sourcing & pilot-review model** (§5.10, §6.7 — official manufacturer source, RAG-generated, every question human-reviewed by pilots via an Admin console; licensed sources as it scales); **data privacy** (§14 — weakness data private to the pilot; airlines never see individual data; B2B aggregated-only); **gamification** (§6.4 — restrained; daily-completion streaks, no points marketplace); **name clearance** (§4.7 — researched: usable but an education-class collision exists; attorney check + distinguishing store name recommended). Pricing free-first (§4.10). Integrates all four source documents. Residual to-dos (execution, not design blockers): trademark-attorney review + final content-license path as the product scales. The brief is ready to hand to Brand, UX Research, UI Design, and Figma-generation agents — first Figma batch = the **V1/V2 core loop** (onboarding → path assignment → Flight Plan/Hero Tile → revision pool → session + feedback → light Progress), all **unlocked/free**, per §11.*
