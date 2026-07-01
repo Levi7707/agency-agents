@@ -654,7 +654,16 @@ The home surface. Answer in one glance, top → bottom: *what do I do right now,
 
 ## 9. Design System & Visual Language
 
-### 9.1 Direction: **"Modern Glass-Cockpit"** (dark-first) — recommended & spec-aligned
+> **⚠️ DIRECTION UPDATED (supersedes the dark proposal below).** The realized OnCourse design language is **Light + Teal, Inter** — matching the founder's existing "vector — V0" reference and built in the **OnCourse Aviation** Figma file (21 screens). Use **this** system for all design work. The "Modern Glass-Cockpit / dark-first" text in §9.1–9.3 is the earlier *proposal* and is retained only as history.
+>
+> **Live design file:** OnCourse Aviation — `https://www.figma.com/design/VfD60619fgSHWnd3EtFDUg`
+>
+> **Palette (light + teal):** bg `#f4f6f7` · surface/cards `#ffffff` · border `#e2e7e9` · text `#0c1a24` · text-secondary `#5b6b76` · muted `#9aa7ae` · chip `#ecf1f2` · **brand teal `#0e9594`** (+ tint `#eaf5f4`) · **correct/positive `#1fa971`** (bg `#e4f4ec`) · attention `#e8952b` · critical `#dc2626`.
+> **Type:** **Inter** (Regular/Medium/Semi Bold/Bold). *(DM Sans — the prior app's font — is an acceptable swap, but the reference and built screens use Inter.)*
+> **Components:** iOS status bar · segmented progress dots · category chips (uppercase, tracked) · white bordered cards (radius 12–20) · option cards with green correct-state · explanation card with source reference (e.g. `FCOM 1.29.10`) · teal primary button (h 54, radius 14) · 4-tab bar (Flight Plan · Train · Progress · Profile) + center FAB · toggles/radios · streak week-dots.
+> **Status semantics** are unchanged from §9.2 in meaning (green = current/correct · amber = attention/due · red = critical); only the hues shifted to the teal-family palette above.
+
+### 9.1 Direction *(HISTORICAL PROPOSAL — superseded by the note above)*: "Modern Glass-Cockpit" (dark-first)
 
 Premium, dark-first, precision-instrument-inspired, but **modern and restrained** (high-end fintech/health app, not literal avionics skeuomorphism). Rationale: credibility + differentiation in a category of database-like UIs; calm high-contrast data displays mirror the cockpit; gauges/radars are native metaphors (currentness gauge, competency radar); and the source spec **explicitly** asks for OLED Pure-Black + Dynamic Contrast (§6.6). Provide a **light theme** too (system toggle), but design dark as the hero.
 
