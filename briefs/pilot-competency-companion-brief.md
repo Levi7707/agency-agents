@@ -2,7 +2,7 @@
 
 > **Document type:** Master project brief (brand → business strategy → method → product → UI/UX)
 > **Product name:** **OnCourse** *(selected; may change later, but any change is name-only — branding/colors/voice/story stay fixed. See §4.7.)*
-> **Status:** Draft v4.2 — content governance & pilot-review model (§5.10) + Admin Review console (§6.7); data-privacy stance decided (§14); restrained-gamification guardrail (§6.4); name-clearance findings (§4.7); pricing free-first (§4.10); content pipeline & phased personalization (§5.9); phased roadmap (§13.1); tech stack (§14); exercise formats (§15); sample-content kit (§16). Name: OnCourse; full Brand Foundations (§4). Integrates four source documents (below).
+> **Status:** Draft v4.3 — adds §17 Prior Work / Reference (existing prototype validates the stack/data-model/palette; supersedes its light-playful look; DM Sans adopted). Plus: content governance & pilot-review (§5.10, §6.7); data-privacy stance (§14); restrained gamification (§6.4); name-clearance findings (§4.7); free-first pricing (§4.10); content pipeline & phased personalization (§5.9); phased roadmap (§13.1); tech stack (§14); exercise formats (§15); sample-content kit (§16). Name: OnCourse; full Brand Foundations (§4). Integrates four source documents (below).
 > **Date:** 2026-06-29
 > **Primary purpose:** The single source of truth and deep-context reference for AI design agents generating high-fidelity UI/UX screens in Figma. A downstream agent should be able to read *this brief alone* and understand the full picture — strategy, the underlying training method, the complete feature system, information architecture, screens, and visual language.
 
@@ -48,6 +48,7 @@
 14. [Tech Stack & Design Constraints](#14-tech-stack--design-constraints)
 15. [Exercise Formats & Question Architecture](#15-exercise-formats--question-architecture)
 16. [Design-Ready Sample Content Kit](#16-design-ready-sample-content-kit)
+17. [Prior Work / Reference (context only)](#17-prior-work--reference-context-only)
 
 ---
 
@@ -681,7 +682,7 @@ Premium, dark-first, precision-instrument-inspired, but **modern and restrained*
 **Light theme:** `#F7F9FB` base, `#FFFFFF` surfaces, `#0B0F14` text; keep brand/accent hues, darken for WCAG AA.
 
 ### 9.3 Typography
-- **Primary:** clean precise grotesque — **Inter** (recommended) or **SF Pro** on iOS. Optional technical display face for big numbers.
+- **Primary:** **DM Sans** — *adopted from the prior prototype (§17): already owned/loaded, a clean geometric sans that suits the precision brand.* Fallbacks: SF Pro (iOS) / Inter. **Drop the prototype's "Poppins/playful" face** — it conflicts with the restrained "quiet edge" (§4.4). Optional technical display face for big numbers only.
 - **Always tabular figures** for scores, dates, counts, countdowns (precision; no jitter).
 
 | Style | Size / weight | Use |
@@ -912,4 +913,32 @@ Phases run **Concept → V0 → V1 → V2 → V3**, grouped by **value bundle** 
 
 ---
 
-*End of brief v4.2. Name: **OnCourse** (§4.7). The four previously-open items are now resolved from founder input: **content sourcing & pilot-review model** (§5.10, §6.7 — official manufacturer source, RAG-generated, every question human-reviewed by pilots via an Admin console; licensed sources as it scales); **data privacy** (§14 — weakness data private to the pilot; airlines never see individual data; B2B aggregated-only); **gamification** (§6.4 — restrained; daily-completion streaks, no points marketplace); **name clearance** (§4.7 — researched: usable but an education-class collision exists; attorney check + distinguishing store name recommended). Pricing free-first (§4.10). Integrates all four source documents. Residual to-dos (execution, not design blockers): trademark-attorney review + final content-license path as the product scales. The brief is ready to hand to Brand, UX Research, UI Design, and Figma-generation agents — first Figma batch = the **V1/V2 core loop** (onboarding → path assignment → Flight Plan/Hero Tile → revision pool → session + feedback → light Progress), all **unlocked/free**, per §11.*
+## 17. Prior Work / Reference (context only)
+
+> **Purpose:** a prior working prototype exists. This section mines it for context so the design agents are *better informed* — it is **not** a spec to copy. Agents should design **fresh** toward the best outcome and the current brief's direction; where the prototype conflicts with the brand (§4), the **brief wins**. *(The prototype's operator branding is intentionally omitted here.)*
+
+### 17.1 What exists
+A functional prototype — internally *"FL Change / Pilot Academy"* — a **Duolingo-style A320 (and 737) quiz app**. In OnCourse terms, it is essentially the **self-directed "Train" substrate + streaks already built**: Quick Test and Custom Quiz, four working exercise types, streaks, stats, question flagging/reporting. It does **not** yet have the engine-pushed **Flight Plan** (paths + revision pools), the competency-continuity/currentness layer, the RAG pipeline, or the admin review console — those are the net-new OnCourse work.
+
+### 17.2 What it confirms / de-risks (carry forward)
+- **Tech stack — validates §14 exactly:** Next.js 14 (App Router, static export) + TypeScript + Tailwind + **Framer Motion** + **Lucide** icons + **Firebase** (Firestore + Auth: Email/Google/Apple) + **Capacitor 6** (iOS), Capacitor Secure Storage/Preferences. The stack is proven, not theoretical.
+- **Exercise types — validates §15:** the type union is already `multiple-choice | flashcard | true-false | fill-blank | drag-drop` (all five; drag-drop typed). And `QuizType` already includes `'daily'` and `'course'` — the codebase *anticipated* the daily/path concepts OnCourse formalizes.
+- **Question schema — reusable for the revision-pool DB:** `{ id, question, answer, type, options?, explanationsText, explanationsReference, category, domain, topic }`. Note **`explanationsReference`** (e.g. an FCOM/OM-A citation) is exactly the **source-reference/trust signal** §5.10 calls for — already in the model.
+- **User/data model — seeds currentness:** `users` carries `streak, lastPracticeDate, totalQuestionsAnswered, correctQuestions[], failedQuestions[], flaggedQuestions[]`. **`failedQuestions[]` is the embryonic weak-area signal.**
+- **Existing modes map cleanly:** Quick Test + Custom Quiz (filters incl. **Weak Areas**, reference manual, domain Normal/Abnormal/Systems, exercise-type, count slider, est. time) → OnCourse's **Train** tab. Streak (gauge, auto-reset) → retention loop.
+- **Status palette already matches the brief (§9.2):** sky-blue primary, emerald success, amber warning, red error — the brief's status semantics are effectively pre-validated.
+- **Font:** DM Sans is already in use → **adopted as primary** (§9.3).
+
+### 17.3 What is SUPERSEDED (do **not** carry forward)
+- **Visual theme:** the prototype is **light / cream / sky-blue / gradient / "playful."** OnCourse's locked direction is **dark-first "Modern Glass-Cockpit," restrained "quiet edge"** (§4.4, §9.1). Design to the **brief**, not the prototype's look.
+- **Poppins "playful" font** and **XP/lesson-reward gamification** conflict with the restrained-gamification decision (§6.4) — drop/de-emphasize.
+- **Name:** the prototype's name is retired → **OnCourse** (§4.7).
+
+### 17.4 Net-new for OnCourse (the real design/build ahead)
+Flight Plan (paths + engine-pushed revision pools) · path routing/assignment · competency-continuity + (later) dual-currentness · RAG content pipeline + Admin Review console (§6.7) · the dark quiet-edge redesign of the whole experience · the phased personalization (§5.9).
+
+> **Bottom line for the agents:** reuse the *stack, data model, exercise mechanics, and status palette*; **redesign the look and feel** to the brief; **build** the engine/Flight Plan/paths that the prototype never had.
+
+---
+
+*End of brief v4.3. Name: **OnCourse** (§4.7). Adds §17 Prior Work / Reference (a working prototype on the exact stack — reuse its stack/data-model/exercise mechanics/palette; supersede its light-playful look with the dark quiet-edge direction; DM Sans adopted as primary font). The four previously-open items are now resolved from founder input: **content sourcing & pilot-review model** (§5.10, §6.7 — official manufacturer source, RAG-generated, every question human-reviewed by pilots via an Admin console; licensed sources as it scales); **data privacy** (§14 — weakness data private to the pilot; airlines never see individual data; B2B aggregated-only); **gamification** (§6.4 — restrained; daily-completion streaks, no points marketplace); **name clearance** (§4.7 — researched: usable but an education-class collision exists; attorney check + distinguishing store name recommended). Pricing free-first (§4.10). Integrates all four source documents. Residual to-dos (execution, not design blockers): trademark-attorney review + final content-license path as the product scales. The brief is ready to hand to Brand, UX Research, UI Design, and Figma-generation agents — first Figma batch = the **V1/V2 core loop** (onboarding → path assignment → Flight Plan/Hero Tile → revision pool → session + feedback → light Progress), all **unlocked/free**, per §11.*
