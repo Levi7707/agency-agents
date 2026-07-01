@@ -2,19 +2,24 @@
 
 > **Document type:** Master project brief (brand → business strategy → method → product → UI/UX)
 > **Product name:** **OnCourse** *(selected; may change later, but any change is name-only — branding/colors/voice/story stay fixed. See §4.7.)*
-> **Status:** Draft v3.1 — name locked (OnCourse); full Brand Foundations (§4); integrates the two authoritative source documents (see below)
+> **Status:** Draft v4.0 — adds the content pipeline & phased personalization (§5.9), the phased roadmap from the feature database (§13.1), tech-stack constraints (§14), the exercise-format spec (§15), and a design-ready sample-content kit (§16). Name locked (OnCourse); full Brand Foundations (§4). Integrates four source documents (below).
 > **Date:** 2026-06-29
 > **Primary purpose:** The single source of truth and deep-context reference for AI design agents generating high-fidelity UI/UX screens in Figma. A downstream agent should be able to read *this brief alone* and understand the full picture — strategy, the underlying training method, the complete feature system, information architecture, screens, and visual language.
 
 > **Canonical source documents this brief integrates (authoritative — defer to them on mechanics):**
 > 1. **Product Functionality Specification** — the full feature system (onboarding, learning engine, home, retention psychology, privacy/trust, accessibility, content taxonomy).
 > 2. **Competency Continuity Method (v3)** — the scientific/operational method: Operational Training Units (OTUs), EBT double-entry currentness, exposure model, recurrence pools, scoring, training-pattern generation, currentness engine.
+> 3. **Question Architectures for Exercise-Type Generation** — the canonical exercise types, grammar structures per type, and formatting rules, with A320 example stems. Governs §15 and all question-screen content.
+> 4. **Feature Prioritization Database (46 features)** — phasing (Concept/V0–V3), MoSCoW priority, effort, risk, value bundles (VB01–06), tech gates (T0–T3), dependencies, and suggested tools (Firebase + Capacitor). Governs §13.1 and §14.
 > Where this brief and a source document differ on *product mechanics*, the source document wins. This brief adds the strategy, positioning, IA, and visual/design specification on top.
 
 > **Key product decisions locked:**
 > - **Scope:** MVP = the competency-continuity training engine. "Career companion" extras (documents, expiry, logbook, career prep) are **later phases**, not MVP.
 > - **Aircraft:** **A320 short-haul content**, but the UI is designed as a **type-agnostic shell** that visibly generalizes to other types later.
-> - **Method visibility:** **Operational/simple UI.** Pilots see concrete *actions* ("fuel leak", "de-icing") and the *9-competency* view. The method's internal machinery (OTUs, exposure categories, recurrence pools, scoring) stays **backend** — never shown as jargon.
+> - **Personalization is phased (§5.9).** *Release 1* routes each pilot to **one of 3–4 hand-authored training paths** (via the intent quiz + light signup data) and pushes that path's **revision pools** — personalization by *routing*. The *full engine* (per-pilot computed patterns + dual-currentness radar/analytics) comes **later**. So early-release screens show **light status** (path, today's pool, streak, progress); the rich competency radar is a **later-phase** view.
+> - **Engine content has a dedicated home.** A surface (working name **"Flight Plan"**) is where the engine **pushes** the due revision pools; **self-directed** single-question practice (quick test / search / build-your-own) lives separately in **Train**. See §8.
+> - **Method visibility:** **Operational/simple UI.** Pilots see concrete *actions* ("fuel leak", "de-icing") and (later) the *9-competency* view. Internal machinery (OTU IDs, exposure categories EC1–EC6, recurrence-pool numbers, scoring) stays **backend** — never shown as jargon.
+> - **Tech stack (§14):** hybrid mobile — **Capacitor** shell + **Firebase** (Auth, Firestore, Remote Config, Storage). Design within hybrid-rendering and native-feel constraints.
 > - **First Figma batch:** the **core loop** (see §11).
 
 > **How to read this brief:**
@@ -40,6 +45,9 @@
 11. [Figma Generation Handoff Notes](#11-figma-generation-handoff-notes)
 12. [Content Taxonomy (A320)](#12-content-taxonomy-a320)
 13. [Roadmap, Metrics & Risks](#13-roadmap-metrics--risks)
+14. [Tech Stack & Design Constraints](#14-tech-stack--design-constraints)
+15. [Exercise Formats & Question Architecture](#15-exercise-formats--question-architecture)
+16. [Design-Ready Sample Content Kit](#16-design-ready-sample-content-kit)
 
 ---
 
@@ -335,7 +343,51 @@ Training is triggered by **two evidence streams**, but the task surfaced to the 
 
 **Hide (backend machinery — never as jargon):**
 - OTU IDs, exposure-category codes (EC1–EC6), recurrence pool numbers, scoring formulas, the double-entry implementation detail.
-- *Exception:* an optional power-user/advanced reveal is **out of scope for v2** (we chose operational/simple).
+- *Exception:* an optional power-user/advanced reveal is **out of scope** (we chose operational/simple).
+
+### 5.9 Content pipeline & phased personalization (how the engine reaches the pilot)
+
+The method above is the *scheduling brain*. Here is how it actually produces and delivers content — and how that is **phased** so Release 1 ships without the full engine.
+
+**The content pipeline:**
+
+```
+Validated A320 source (FCOM / OM-A …)
+      │   RAG generation — many questions/exercises,
+      ▼   in the fixed question-architecture formats (§15)
+Question bank  ──(human/pilot validation — no unvalidated content ships, §13.3)──►
+      │
+      ▼   the engine maps each item to OTUs + competencies + exposure/recurrence,
+          then SELECTS & GROUPS items into REVISION POOLS
+Parallel "Revision Pools" database  ──►  pushed into the app's dedicated surface ("Flight Plan")
+      │
+      └► individual items can also be PULLED ad hoc (Train: quick test / search / build-your-own)
+```
+
+**Terminology (kept distinct to avoid confusion):**
+- **Recurrence pool** *(method term, backend)* — an *interval family* (Pool 1–5) describing how often an OTU should recur.
+- **Revision pool / set** *(the deliverable)* — a concrete, ordered **list of questions/exercises** the engine assembled for one revision, stored in the parallel database and pushed to the pilot.
+
+**Two delivery modes in the app:**
+| Mode | What it is | Where it lives |
+|------|-----------|----------------|
+| **Engine-pushed** *(the differentiator)* | Revision pools the engine assigns/schedules for you — "your personal training department" | **Flight Plan** surface (+ the Predictive Hero Tile surfaces the top due pool) |
+| **Self-directed** | You pull single questions / build a quick test / search a topic | **Train** tab |
+
+**Phased personalization — this is the key delivery decision:**
+
+| | **Release 1 — personalization by *routing*** | **Later — personalization by *engine*** |
+|---|---|---|
+| How a pilot gets their content | Intent quiz + light signup data **routes** them to **one of 3–4 hand-authored training paths**; the app pushes that path's revision pools | The full competency-continuity engine **computes a unique pattern per pilot** from signup + exposure + performance, and generates/schedules pools dynamically |
+| Feels like | Personalized (curated path chosen for you) | Truly individual (1:1) |
+| Status shown | **Light:** your path, today's pool, streak, path progress | **Rich:** dual-currentness (action list + 9-competency radar), "why due" analytics |
+| Content | Pre-assembled, fully validated pools | Engine-assembled from the validated bank |
+
+> **Design implications (critical for the first Figma batch):**
+> - Design the **Flight Plan** surface around **"your path → today's revision pool → do it."** A **path** is a named, recurring program (e.g. *"Sharp FO — Systems & Abnormals"*); a pilot has **one active path** at a time.
+> - Onboarding needs a **path-assignment moment** ("Based on your answers, your OnCourse path is …") — honest, not over-claiming AI.
+> - Early-release **status is light** (path progress, pool completion, streak, due count). **Do not** design the full competency radar as an early-release screen — mark it a **later-phase** view.
+> - Keep the **self-directed Train** mode visibly separate from the engine-pushed Flight Plan, so "what OnCourse tells me to do" ≠ "what I chose to poke at."
 
 ---
 
@@ -456,104 +508,109 @@ PRE-CHECK: currentness surfaces overdue rare-critical items → drill before the
 
 > **Primary build spec for Figma.** Mobile-first, **iOS primary** (390×844 / iPhone reference; Android parity via Material adaptation). **Dark-first** (§9). Operational/simple language (§5.8). A320 content, type-agnostic shell. **Batch-1 (core loop) screens are marked ⭐.**
 
-### 8.1 Navigation model — bottom tabs + center action
+### 8.1 Navigation model — 4 tabs + center action *(resolved for early release)*
+
+Early release uses **4 tabs + a center FAB** (not 5) — cleaner, and it matches the "one best action" philosophy. The engine-pushed content and the home are the *same* surface (**Flight Plan**); SRS "due" items surface *within* Flight Plan early and can graduate to their own tab later.
 
 | Tab | Icon idea | Purpose |
 |-----|-----------|---------|
-| **Home** ⭐ | gauge / target | Predictive Hero Tile, today's best action, currentness + streak summary |
-| **Review** ⭐ | refresh / cards | SRS due-items queue (the spaced-repetition engine) |
-| **Train** ⭐ | brain / sliders | Quick Test, Custom Quiz, Natural-Language Search, Low-Load toggle, topic library |
-| **Readiness** ⭐ | radar / list | Dual currentness: Action list + 9-competency view; next-check context |
-| **Profile** | pilot / wings | Stats, streak, milestones, skill tree, settings, AI & Trust, subscription |
-| **Center FAB** ⭐ | "+" → *Start best session* | One-tap into the Hero Tile's recommended session from anywhere |
+| **Flight Plan** ⭐ *(home)* | route / target | The engine-pushed path: Predictive Hero Tile (today's top pool), your active path, due revision pools, streak + light progress. **The dedicated engine-content surface.** |
+| **Train** ⭐ | brain / sliders | Self-directed *pull*: Quick Test, Custom Quiz, Natural-Language Search, Low-Load toggle, topic library |
+| **Progress** ⭐ | chart / rings | Streak, path progress, pool history, milestones. *(Later phase: the dual-currentness action list + 9-competency radar land here.)* |
+| **Profile** | pilot / wings | Identity, settings, AI & Trust, subscription, Offline Vault |
+| **Center FAB** ⭐ | "+" → *Start today's pool* | One-tap into the Hero Tile's recommended revision pool from anywhere |
 
-> Reserve clearly-labeled "Coming soon" rows in Profile for the future career-companion pillars (Documents, Logbook, Career) so the growth path is visible without cluttering MVP.
+> Reserve clearly-labeled "Coming soon" rows in Profile for the future career-companion pillars (Documents, Logbook, Career) so the growth path is visible without cluttering MVP. The **later-phase competency radar / dual-currentness** views (screens 30–33 below) also live under Progress when they arrive.
 
 ### 8.2 Screen inventory
 
 **Onboarding & identity** ⭐
-1. ⭐ Splash / brand (logo, tagline: "Stay sharp between checks.")
+1. ⭐ Splash / brand (logo, tagline: "Stay on course.")
 2. ⭐ Zero-login welcome (start instantly; passkey/email offered later)
-3. ⭐ Predictive Intent Quiz — 3 visual cards (limitations / memory items / systems / performance…)
-4. ⭐ Play-First Tutorial — one sample per exercise type (flashcard, cloze, scenario), each a different subject
+3. ⭐ Predictive Intent Quiz — 3 visual cards (limitations / memory items / systems / performance…) — *drives path routing*
+4. ⭐ Play-First Tutorial — one sample per exercise type (flashcard, cloze, MCQ, true/false, drag-drop), each a different subject
 5. ⭐ Dynamic Goal Setting — commitment level (e.g. 1 min/day · 4×/week · intensive)
-6. ⭐ First-Session Choice — Explore / Quick Start / Build My Own Path
-7. ⭐ Passkey / account creation (offered *after* first value)
+6. ⭐ **Path Assignment** — "Based on your answers, your OnCourse path is **[e.g. 'Sharp FO — Systems & Abnormals']**" — the routed path (1 of 3–4); honest, no AI over-claim; option to view/switch path
+7. ⭐ First-Session Choice — Explore / Quick Start / Build My Own Path
+8. ⭐ Passkey / account creation (offered *after* first value)
 
-**Home** ⭐
-8. ⭐ **Home / Predictive Hero Tile** — see §8.3 (the most important screen)
-9. ⭐ Hero Tile "Why?" sheet — plain-language reason + **Change** (override to pick another session)
-10. Social Activity Ticker (compact, on Home)
+**Flight Plan (home + engine-pushed pools)** ⭐
+9. ⭐ **Flight Plan / Predictive Hero Tile** — see §8.3 (the most important screen): active path, today's top revision pool, streak, light progress
+10. ⭐ **Revision Pool overview** — the pushed pool: name, what it covers (actions/topics), item count + est. time, **Start**; the engine's "why this pool" in plain language
+11. ⭐ Hero Tile / pool "Why?" sheet — plain-language reason + **Change** (override to another due pool)
+12. ⭐ **Path detail** — the active path: its pools, cadence, progress; switch-path entry
+13. Social Activity Ticker (compact, on Flight Plan) *(later phase)*
 
-**The session (learning engine)** ⭐
-11. ⭐ Question — **Flashcard** (recall, flip)
-12. ⭐ Question — **Cloze / fill-in-the-blank**
-13. ⭐ Question — **MCQ**
-14. ⭐ Question — **Scenario / decision** (e.g. "WINDSHEAR after rotation — immediate priority?")
-15. ⭐ Question — **Ordering / sequencing** (e.g. memory-item steps)
-16. ⭐ Question — **Time-limited drill** (Pool 5 immediate-action; visible countdown)
-17. ⭐ Feedback screen — correct/incorrect + crisp explanation + competency tag + source-reference link
-18. ⭐ **SRS rating** control — Again / Hard / Good / Easy (on review items)
-19. ⭐ Session summary — score, streak ++, what improved, which actions/competencies were refreshed
+**The session (learning engine)** ⭐ — *canonical exercise types per Source Doc 3 (§15)*
+14. ⭐ Question — **Flashcard** (retrieval cue → flip/reveal)
+15. ⭐ Question — **Multiple Choice (MCQ)**
+16. ⭐ Question — **Fill-in-the-blank (cloze)**
+17. ⭐ Question — **True / False**
+18. ⭐ Question — **Drag-drop** (variants: order / match / sort)
+19. ⭐ Session summary — score, streak ++, pool completed, what improved
+20. ⭐ Feedback screen — correct/incorrect + crisp explanation + competency tag + source-reference link
+21. ⭐ **SRS rating** control — Again / Hard / Good / Easy (on review items)
 
-**Review (SRS)** ⭐
-20. ⭐ **Review tab home** — due-items queue, count + est. time ("8 due ≈ 2 min"), start
-21. ⭐ Review in-progress (same question components, SRS framing)
+> **Not separate question types:** a **scenario** is a *content style* rendered via MCQ/flashcard (e.g. "WINDSHEAR after rotation — immediate priority?"); a **time-limited drill** is a *mode/wrapper* (a visible countdown overlay) applied to any type for Pool-5 immediate-action items. Design both as **variants/overlays**, not new screens.
 
-**Train** ⭐
+**Train (self-directed pull)** ⭐
 22. ⭐ Train home — Quick Test · Custom Quiz · search entry · Low-Load (Cognitive Load Ceiling) toggle
 23. ⭐ **Natural-Language Search** — free-text → auto-built quiz preview ("PTU logic → 8 Q")
 24. ⭐ Quick Test setup (adaptive on; or manual difficulty fallback)
 25. Custom Quiz / Build My Own Path (subject, system, count)
 26. Topic library — browse taxonomy (§12), filtered to A320
-27. Micro-quiz interrupt — in-app overlay variant + notification/Dynamic Island/widget mockups (3 question intents §6.2)
+27. Micro-quiz interrupt — in-app overlay variant + notification/Dynamic Island/widget mockups (3 question intents §6.2) *(V3)*
 
-**Readiness — dual currentness** ⭐ *(the differentiator)*
-28. ⭐ **Action Currentness** — operational list/map of actions/events with status (current/due/overdue), sorted by urgency; tap → detail
-29. ⭐ Action detail — one action (e.g. "Fuel leak in cruise"): status, last reviewed, next due, **Why?**, "Drill now"
-30. ⭐ **Competency Currentness** — 9-competency radar; weak competencies called out
-31. ⭐ Single competency detail (e.g. KNO) — trend, linked actions that are weak, recommended drills
-32. Next-check context — optional date of next recurrent/sim; surfaces a pre-check focus list
+**Progress (early = light status)** ⭐
+28. ⭐ Progress home — streak, path progress, pool history, consistency; milestones entry
+29. ⭐ Empty/early state — "Your picture builds as you train" (cold-start; see §16)
 
-**Retention / gamification**
-33. Streak screen — daily vs cadence mode, calendar, freezes
-34. Streak Guard Marketplace — spend points / schedule vacation
-35. Relative Leaderboard (~10 peers)
-36. Collaborative Quest (partner)
-37. Milestones / verifiable badges — earned + verification page mock
-38. Progressive Investment Tracker — skill tree / knowledge map
-39. Value Realization — weekly report
+**Dual currentness — the differentiator** 🔒 *(LATER PHASE — design after the engine ships; lives under Progress)*
+30. 🔒 **Action Currentness** — operational list of actions with status (current/due/overdue), sorted by urgency
+31. 🔒 Action detail — one action (e.g. "Fuel leak in cruise"): status, last reviewed, next due, **Why?**, "Drill now"
+32. 🔒 **Competency Currentness** — 9-competency radar; weak competencies called out
+33. 🔒 Single competency detail (e.g. KNO) — trend, linked weak actions, recommended drills
+34. 🔒 Next-check context — optional date of next recurrent/sim; pre-check focus list
+
+**Retention / gamification** *(mostly V2–V3)*
+35. ⭐ Streak screen — daily vs cadence mode, calendar, freezes *(V1)*
+36. Streak Guard Marketplace — spend points / schedule vacation *(V3; needs points economy — undefined, §13.3)*
+37. Relative Leaderboard (~10 peers) *(V3; validate fit with pro audience)*
+38. Collaborative Quest (partner) *(V3)*
+39. Milestones / verifiable badges — earned + verification page mock *(V2)*
+40. Progressive Investment Tracker — skill tree / knowledge map *(V3)*
+41. Value Realization — weekly report *(V2)*
 
 **Profile, trust & system**
-40. Profile home — identity, aircraft chip (A320), stats, streak, milestones, skill-tree entry
-41. Stats / progress — currentness over time, competency history, consistency
-42. **AI & Trust Hub** — AI on/off, signals used, privacy boundaries, reset; reachable from every Why?
-43. Settings — auth/passkey, aircraft, notifications + windows, theme (incl. Pure Black / High Contrast), haptics, Eco-Mode, Focus Mode, Incognito Pause, Privacy Zones, State-Persistence/devices
-44. Training Preferences — Learning Style Profile (formats + explanation depth)
-45. Subscription / paywall — Free vs Pro, value-led (§4.3)
-46. Offline Vault — downloaded content manager
-47. "Coming soon" / roadmap teaser — Documents · Logbook · Career
+42. Profile home — identity, aircraft chip (A320), streak, milestones, active path
+43. **AI & Trust Hub** — AI on/off, signals used, privacy boundaries, reset; reachable from every Why? *(V2)*
+44. Settings — auth/passkey, aircraft, notifications + windows, theme (incl. Pure Black / High Contrast), haptics, Eco-Mode, Focus Mode, Incognito Pause, Privacy Zones, State-Persistence/devices
+45. Training Preferences — Learning Style Profile (formats + explanation depth)
+46. Subscription / paywall — Free vs Pro, value-led (§4.10)
+47. Offline Vault — downloaded content manager *(V2)*
+48. "Coming soon" / roadmap teaser — Documents · Logbook · Career
 
 **Global states** (design as variants, not separate flows) ⭐
-48. ⭐ Empty (no due items: "You're current — nice."; no goal set), Loading (skeletons; radar/gauge shimmer-in), Error, **Offline** (calm chip; daily loop still works from vault), Success/celebration (streak milestone, "all current" state, badge earned), **Low-Load mode** active variant.
+49. ⭐ Empty ("Your path starts here" / no pool due yet), Loading (skeletons; shimmer-in), Error, **Offline** (calm chip; daily loop still works from vault), Success/celebration (streak milestone, pool complete, badge earned), **Low-Load mode** active variant, **cold-start** (§16).
 
-### 8.3 Home / Predictive Hero Tile — detailed spec (most important screen) ⭐
+### 8.3 Flight Plan / Predictive Hero Tile — detailed spec (most important screen) ⭐
 
-Top → bottom, answer in one glance: *what do I do right now, am I ready, where am I weak.*
+The home surface. Answer in one glance, top → bottom: *what do I do right now, and how's my path going.*
 
 1. **Greeting + identity strip** — "Good morning, Maya" · aircraft chip (A320) · streak (🔥 12).
-2. **Predictive Hero Tile (hero):** the single best next session, large and tappable:
-   - Title: the concrete action/session ("Drill: Windshear escape" / "Review 8 due items").
-   - Time budget ("≈ 2 min") and progress if resuming.
-   - Plain **Why** label ("due items" / "weak topic: PSD" / "your priority") + **Change** (override).
+2. **Active-path strip** — the routed path name ("Sharp FO — Systems & Abnormals") + progress (e.g. "Week 3 · 62%"). Tap → Path detail (#12).
+3. **Predictive Hero Tile (hero):** today's top revision pool, large and tappable:
+   - Title: the pool ("Today: Hydraulics & abnormal config — 8 items").
+   - Time budget ("≈ 4 min") and progress if resuming.
+   - Plain **Why** label (early release: "next in your path" / "due for review") + **Change** (pick another due pool).
    - Primary CTA button: **Start**.
-3. **Dual-currentness summary band** — two compact, tappable cards side by side:
-   - **Action readiness** — e.g. "3 actions due" with a mini status bar (green/amber/red) → Action Currentness (#28).
-   - **Competency snapshot** — the 9-spoke radar in compact form, 1–2 weak spokes flagged → Competency Currentness (#30).
-4. **Micro-quiz nudge** (optional) — "Got 15 seconds? Quick check." → micro-quiz overlay.
-5. **Secondary row** — streak/stats chip, skill-tree progress, social ticker, (reserved) "Coming soon".
+4. **Due pools list** (if more than one) — other revision pools ready, with item count + est. time.
+5. **Light status row** — streak chip · path progress · pools-completed. *(No competency radar in early release.)*
+6. **Micro-quiz nudge** (optional, V3) — "Got 15 seconds? Quick check." → micro-quiz overlay.
 
-> If a viewer can't tell within 3 seconds this is a **forward-looking readiness/training** app — and can't see *both* "what to do now" and "how ready am I" — the design missed the brief.
+> **Later-phase enhancement:** once the engine ships, add a **dual-currentness summary band** here (compact action-readiness bar + compact 9-spoke competency radar → screens #30/#32). Do **not** design this band for the early-release batch.
+>
+> If a viewer can't tell within 3 seconds this is a **forward-looking, path-driven training** app (not a logbook) — and can't see *what to do right now* + *how my path is going* — the design missed the brief.
 
 ---
 
@@ -668,21 +725,21 @@ The identity should feel like a precision instrument, not a consumer toy — res
 > Direct instructions for the AI design agent(s).
 
 1. **Build the design system first** (§9): color variables (dark + light + Pure-Black), text styles (tabular figures), spacing tokens, then the signature components (§9.5) with variants — *then* assemble screens. Coherent + dev-ready.
-2. **Frame:** iPhone 390×844, iOS-primary; **dark is the hero**. Provide light + Pure-Black variants of at least Home, a question screen, and the competency radar.
-3. **Batch 1 = the core loop (⭐ screens).** Prioritize, in order:
-   1. Onboarding (zero-login → intent quiz → play-first tutorial → goal → first-session choice)
-   2. **Home / Predictive Hero Tile** (§8.3) + Why? sheet
-   3. Session: at least flashcard, MCQ, scenario, time-limited drill + feedback + SRS rating + summary
-   4. **Review tab** (SRS due queue)
-   5. **Dual currentness:** Action Currentness list + Action detail, and Competency radar + single-competency detail
-   6. Train home + Natural-Language Search → auto-quiz
-   *(Gamification, trust/privacy, and adaptive screens are later batches.)*
-4. **Operational/simple language (§5.8):** show concrete actions ("Fuel leak in cruise", "De-icing") + the 9 competencies. **Never** surface OTU IDs, exposure categories (EC1–6), or pool numbers as user-facing text.
-5. **A320 + type-agnostic shell:** use realistic A320 content from §12; design the structure so type selection/other aircraft obviously slot in later (e.g. the aircraft chip, taxonomy filters).
-6. **Honor the positioning everywhere:** forward-looking, coaching, calm, precise. Two readiness truths (action + competency) must be reachable. No logbook/data-entry aesthetics.
-7. **Status colors are global (§9.2):** green=current/strong, amber=due/attention, red=overdue/weak/critical.
-8. **Respect the disclaimer (§1.3):** no copy implying formal qualification/certification/regulatory currentness. Use plausible-but-generic content; never invent regulations or present unverified procedures as authoritative.
-9. **Accessibility variants:** include a Pure-Black/high-contrast pass and ensure status is never color-only.
+2. **Frame:** iPhone 390×844, iOS-primary; **dark is the hero**. Provide light + Pure-Black variants of at least Flight Plan, a question screen, and a revision-pool screen.
+3. **Batch 1 = the V1/V2 core loop (⭐ screens).** Prioritize, in order:
+   1. Onboarding (zero-login → intent quiz → play-first tutorial → goal → **path assignment** → first-session choice)
+   2. **Flight Plan / Predictive Hero Tile** (§8.3) + **Revision Pool overview** + Why? sheet + Path detail
+   3. Session: all 5 exercise types (flashcard, MCQ, cloze, true/false, drag-drop) + feedback + SRS rating + session summary — use the §16 sample items
+   4. **Train** home + Natural-Language Search → auto-quiz
+   5. **Progress** (light: streak, path progress, pool history) + cold-start/empty states (§16)
+   *(Later batches: the dual-currentness radar #30–34, gamification, trust/privacy, adaptive screens.)*
+4. **Use the §16 sample-content kit and §15 formats** — real A320 items, a real path and pool, real light-status numbers. **No lorem ipsum.**
+5. **Operational/simple language (§5.8):** show concrete actions/topics and pool/path names. **Never** surface OTU IDs, exposure categories (EC1–6), or recurrence-pool numbers as user-facing text.
+6. **A320 + type-agnostic shell:** design the structure so other aircraft slot in later (aircraft chip, taxonomy filters).
+7. **Honor the positioning everywhere:** forward-looking, path-driven, coaching, calm, precise. No logbook/data-entry aesthetics.
+8. **Status colors are global (§9.2):** green=current/strong, amber=due/attention, red=overdue/weak/critical.
+9. **Respect the disclaimer (§1.3):** no copy implying formal qualification/certification/regulatory currentness. Use plausible-but-generic content; never invent regulations or present unverified procedures as authoritative.
+10. **Accessibility variants:** include a Pure-Black/high-contrast pass and ensure status is never color-only.
 
 ---
 
@@ -704,17 +761,23 @@ The identity should feel like a precision instrument, not a consumer toy — res
 
 ## 13. Roadmap, Metrics & Risks
 
-### 13.1 Roadmap (product method × business)
+### 13.1 Roadmap — phased release plan *(from the Feature Prioritization Database, Source Doc 4)*
 
-| Phase | Theme | Scope |
-|-------|-------|-------|
-| **0 — Now** | This brief → Figma hi-fi (core loop) | Strategy + method + full UX/UI spec → batch-1 screens |
-| **1 — MVP** | The training engine | Onboarding · learning engine (SRS/adaptive/micro-quiz/NL search/AI curator) · dual currentness · Home/Hero Tile · core gamification · privacy/trust · adaptive accessibility · **A320 content** |
-| **1.x** | Method completion | Exposure/pool scoring assistant (method Automation 3), exercise templates per pool, scheduler/currentness engine at scale, pilot-validation/governance |
-| **2.x** | Career companion | Documents & expiry vault · currency tracking · digital logbook · expanded AI assistant · career prep |
-| **3.x** | Scale | B2B/ATO currentness dashboards · instructor assignment · fleet analytics · compliance-aware export |
+Phases run **Concept → V0 → V1 → V2 → V3**, grouped by **value bundle** (VB01 Guided Start · VB02 Retention Loop · VB03 Discovery · VB04 Instructor · VB05 Trust · VB06 Accessibility). The **P0 "Must" core is only four features:** Zero-Login (F002), Play-First Tutorial (F004), Predictive Intent Quiz (F003), SRS Engine (F010).
 
-*(The source method's own phases — mapping, competency tagging (Automations 1–2 built), exposure scoring (to build), exercise design, scheduler, validation — live inside Phases 1–1.x.)*
+| Phase | Ships (feature IDs) | Result |
+|-------|---------------------|--------|
+| **V0** | Zero-Login (F002), Play-First Tutorial (F004); data foundations (Guest DB, A320 DB, Compete admin) | Instant-value trial; content foundation |
+| **V1** | Predictive Hero Tile — *simple next-in-list* (F015), Training Streak (F022), Haptics (F043, *done*), Offline mode | The **Flight Plan loop, lean**: path → today's pool → do it → streak |
+| **V2** | SRS Engine (F010), Intent Quiz (F003), Goal Setting (F005), First-Session Choice (F006), Choice-Architecture Defaults (F016), Adaptive Difficulty (F011), NL Search (F013), Smart Notifications (F021), Offline Vault (F035), Focus Mode (F036), AI Trust Hub (F032), Value Realization (F025), Milestones (F026), Dynamic Contrast (F044) | The **real learning engine** + trust + retention |
+| **V3** | Micro-Quiz Interrupts (F012), Personal Content Curator / Instructor Agent (F014), Progressive Investment Tracker (F017), Social (F018–F020), Streak Guard (F023), AI Refinement (F033), Dynamic UI (F042), Mood-Aware UI (F045), State Hand-off (F050) | Advanced AI, social, adaptive |
+| **Concept** *(unscheduled)* | Passkeys (F001), Privacy Zones (F030), Incognito (F031), Cognitive-Load Ceiling (F040), Learning-Style Profile (F041), Sustainable Design (F046), Collaborative Quests (F020) | Backlog / to be scheduled |
+
+**Personalization phasing (§5.9):** Release 1 = **routing to 3–4 hand-authored paths**; the **full computed engine + dual-currentness radar** is a later phase (lands under Progress, screens #30–34).
+
+**Career-companion phase (post-engine):** Documents & expiry vault · currency tracking · digital logbook · expanded AI assistant · career prep → then **B2B/ATO** (fleet currentness dashboards, instructor assignment, fleet analytics, compliance-aware export).
+
+> **Note on "MVP" wording elsewhere in this brief:** where earlier sections say "MVP = the training engine," read it as **V1 (lean Flight Plan loop) → V2 (engine)**. The full engine is V2; V0/V1 are deliberately thinner.
 
 ### 13.2 Success metrics (MVP, directional)
 
@@ -741,4 +804,71 @@ The identity should feel like a precision instrument, not a consumer toy — res
 
 ---
 
-*End of brief v3.1. Name locked: **OnCourse** (§4.7). Includes full Brand Foundations (§4: mission, vision, values, archetype, story, taglines, voice) and logo direction (§9.7); integrates the Product Functionality Specification and the Competency Continuity Method (v3). Remaining open decisions for you: (1) confirm pricing (§4.10); (2) confirm the content-sourcing/validation plan (the #1 risk, §13.3); (3) run the name-clearance checks in §4.7 before public launch. The brief is now fully sufficient to hand to Brand, UX Research, UI Design, and Figma-generation agents — starting with the Batch-1 core-loop screens (§11).*
+---
+
+## 14. Tech Stack & Design Constraints
+
+*(From the Feature Prioritization Database, Source Doc 4 — suggested tools.)*
+
+- **Hybrid mobile:** **Capacitor** (web tech in a native shell) — *not* pure native Swift/Kotlin. Design must render well via web engine and still feel native (respect iOS conventions, safe areas, momentum scroll, haptics F043).
+- **Backend / platform:** **Firebase** — Auth, **Cloud Firestore** (data lives in the cloud), Remote Config (feature flags / phased rollout, e.g. First-Session Choice, Choice-Architecture Defaults), Storage (Offline Vault content).
+- **Secure storage:** **Capacitor secure storage** for sensitive local data.
+- **Design implications:**
+  - **Data-trust posture (fills earlier gap):** because currentness/weak-area data is sensitive to this audience, the UI must make the promise explicit — *this is the pilot's private data; not shared with an employer/airline.* Add reassurance copy in onboarding + a clear statement in the AI & Trust Hub (F032). (Confirm final data-ownership/retention policy — still an open decision.)
+  - **Offline-first for the daily loop:** Offline Vault (F035) preloads due pools; the session + streak must work with no connectivity, syncing on reconnect.
+  - **Remote Config** means screens may be flag-gated — design graceful on/off states for flagged features.
+
+## 15. Exercise Formats & Question Architecture
+
+*(Canonical, from Source Doc 3. These are the **only** exercise types; design one question component per type with the states in §9.5. Content in §16 follows these rules.)*
+
+| Exercise type | Allowed structures (IDs) | Formatting rules |
+|---------------|--------------------------|------------------|
+| **Flashcard** | `CUE_NP`, `CUE_LIMIT`, `CUE_DEF`, `CUE_SCENARIO`, `EMBEDDED_PROMPT` | Retrieval cue, usually ends with `:`. Not a long interrogative. |
+| **Multiple Choice** | `WH_OBJ`, `WH_SUBJ`, `WH_ADJUNCT`, `WH_MEASURE`, `YN_*` (rare), `ALT_CHOICE` | Stem ends with `?`; **no** blank token. |
+| **Fill-in-the-blank** | `CLOZE_1`, `CLOZE_COND` | Contains exactly one `____`; no `?`. |
+| **True / False** | `DECL_FACT`, `DECL_RULE` | Declarative proposition; no `?`, no `____`, no imperative. |
+| **Drag-drop** | `INST_ORDER`, `INST_MATCH`, `INST_SORT` | Begins with imperative (Put/Arrange/Order/Match/Sort); ends with `:`. Variants: **order · match · sort**. |
+
+**Design notes:**
+- **Scenario** = a *content style* delivered via MCQ or flashcard-cue (`CUE_SCENARIO`), **not** a separate type.
+- **Time-limited drill** (Pool-5 immediate-action) = a *countdown wrapper/overlay* on any type — design as a mode, not a new screen.
+- Each item carries a **competency tag** (shown on feedback) and a **source reference** (for auditability/trust).
+
+## 16. Design-Ready Sample Content Kit *(starter — expand with validated bank)*
+
+> Realistic, A320-appropriate examples so hi-fi screens look like a real product — **not** lorem ipsum. *(Content is illustrative for design; production content must pass pilot/expert validation, §13.3.)*
+
+**Sample training paths (Release 1 — pick one to feature in mockups):**
+- **"Sharp FO — Systems & Abnormals"** — hydraulics, electrical, abnormal config; balances routine traps + rare-critical drills.
+- **"Command Prep — Decision & Non-Normals"** — decision-heavy scenarios (fuel leak, diversion, RTO).
+- **"Winter Ops Ready"** — seasonal: de-icing, contaminated runway, LVO.
+
+**Sample revision pool (pushed to Flight Plan):**
+> **"Hydraulics & abnormal config" · 8 items · ≈ 4 min · Why: next in your path**
+
+**Sample items (one per exercise type — use verbatim in mockups):**
+
+1. **Flashcard** (`CUE_LIMIT`) — Front: *"Maximum operating Mach (MMO):"* · Back: *"M0.82"* · Tag: `KNO` · Src: FCOM LIM.
+2. **MCQ** (`WH_MEASURE`) — *"At what differential pressure does the PTU run automatically (green to yellow)?"* · Options: **A** 200 psi · **B** 350 psi · **C** 500 psi · **D** 600 psi · Correct: **C** · Tag: `KNO/PRO` · Feedback: *"The PTU activates on a Δp ≈ 500 psi between green and yellow systems."*
+3. **Fill-in-the-blank** (`CLOZE_COND`) — *"In a rejected takeoff, if ground speed exceeds `____` kt, the spoilers extend automatically."* · Answer: *72* · Tag: `PRO` · Src: FCOM.
+4. **True / False** (`DECL_RULE`) — *"External power has priority over the APU generator when the EXT PWR pushbutton is ON."* · Answer: **True** · Tag: `KNO`.
+5. **Drag-drop / order** (`INST_ORDER`) — *"Put the emergency electrical power supply sequence (loss of main generators) in the correct order:"* · Items to sequence: RAT deploys → EMER GEN online → AC/DC ESS restored → shed non-essential loads · Tag: `PRO/SAW`.
+
+**Sample light-status data (early release — for Flight Plan / Progress mockups):**
+- Streak: **🔥 12 days** · Path: **"Sharp FO — Systems & Abnormals" · Week 3 · 62%** · Pools completed this week: **4 / 6** · Due now: **1 pool (8 items)**.
+
+**Cold-start states (day 0 → day 7):**
+- **Day 0 (post-onboarding):** no history — Flight Plan shows the assigned path + first pool; status row reads *"Your picture builds as you train."* No radar, no streak yet.
+- **Day 1:** streak = 1; path progress ticks; first pool complete shown.
+- **Day 7:** streak building; several pools done; path progress bar meaningful. *(Full competency radar still not shown — later phase.)*
+
+**Display data model (early release — the exact values screens show):**
+- **Streak:** integer days (or weeks in cadence mode).
+- **Path progress:** % complete + week N.
+- **Pool:** item count, est. minutes, completion state (not-started / in-progress n·of·N / done).
+- **Status semantics** stay per §9.2 (green current · amber due · red overdue) applied to *pools/items*. *(The 0–100 currentness scores + radar thresholds are defined when the engine/dual-currentness ships — deferred with screens #30–34.)*
+
+---
+
+*End of brief v4.0. Name: **OnCourse** (§4.7). Adds the content pipeline & phased personalization (§5.9), the phased release plan (§13.1), tech stack (§14), exercise-format spec (§15), and a design-ready sample-content kit (§16); integrates all four source documents. Remaining open decisions for you: (1) pricing (§4.10); (2) content-sourcing/validation plan (§13.3, #1 risk); (3) data-ownership/privacy policy wording (§14); (4) points economy for Streak-Guard Marketplace (§13.3); (5) name-clearance checks (§4.7). The brief is now sufficient to hand to Brand, UX Research, UI Design, and Figma-generation agents — first Figma batch = the **V1/V2 core loop** (onboarding → path assignment → Flight Plan/Hero Tile → revision pool → session + feedback → light Progress), per §11.*
