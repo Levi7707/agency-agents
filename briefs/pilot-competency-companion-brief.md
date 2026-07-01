@@ -2,7 +2,7 @@
 
 > **Document type:** Master project brief (brand → business strategy → method → product → UI/UX)
 > **Product name:** **OnCourse** *(selected; may change later, but any change is name-only — branding/colors/voice/story stay fixed. See §4.7.)*
-> **Status:** Draft v4.0 — adds the content pipeline & phased personalization (§5.9), the phased roadmap from the feature database (§13.1), tech-stack constraints (§14), the exercise-format spec (§15), and a design-ready sample-content kit (§16). Name locked (OnCourse); full Brand Foundations (§4). Integrates four source documents (below).
+> **Status:** Draft v4.1 — pricing decided (free-first → subscription + B2B licensing, §4.10); content pipeline & phased personalization (§5.9); phased roadmap (§13.1); tech-stack constraints (§14); exercise-format spec (§15); design-ready sample-content kit (§16). Name locked (OnCourse); full Brand Foundations (§4). Integrates four source documents (below).
 > **Date:** 2026-06-29
 > **Primary purpose:** The single source of truth and deep-context reference for AI design agents generating high-fidelity UI/UX screens in Figma. A downstream agent should be able to read *this brief alone* and understand the full picture — strategy, the underlying training method, the complete feature system, information architecture, screens, and visual language.
 
@@ -219,21 +219,24 @@ Concise · confident · calm · peer-level · aviation-literate · coaching not 
 | "Your KNO profile is slipping — today: a fuel-leak scenario." | "Time to train KNO." *(abstract, not operational)* |
 | "Done. De-icing back to current; PSD trending up." | "Lesson 4 of 12 complete." *(completion, not competence)* |
 
-### 4.10 Business model (proposal — not in source docs; confirm)
+### 4.10 Business model — **free-first, then subscription + B2B licensing** *(decided)*
 
-**Freemium + single paid "Pro" tier.** Freemium maximizes top-of-funnel in a trust-sensitive niche and seeds the future B2B trojan horse (pilots already using it when we sell to their airline). One Pro tier avoids confusing pricing. One-time purchase rejected — value is ongoing (continuous retrieval), so recurring revenue matches recurring value and funds content/QA (the credibility moat).
+Monetization is **phased**, prioritizing adoption and trust before revenue:
 
-| Tier | Price (proposed) | Includes |
-|------|------------------|----------|
-| **Free** | $0 | Limited daily retrieval, basic action-currentness view, view-only competency snapshot |
-| **Pro** | ~$6–9/mo · ~$59–79/yr | Unlimited retrieval, full dual-currentness analytics, AI curator programs, micro-quiz everywhere, offline vault, advanced gamification |
-| **(Future) Teams/ATO** | Per-seat B2B | Fleet currentness dashboards, instructor assignment, validation/governance, compliance-aware export |
+| Stage | Model | Rationale |
+|-------|-------|-----------|
+| **Stage 1 — Launch** | **100% free, fully unlocked** (no paywall, no locked features) | Land-grab in a trust-sensitive niche; remove every barrier to habit formation and word-of-mouth; build the user base and the validated content library first |
+| **Stage 2 — Growth** | **Introduce a paid subscription** as advanced features mature (dual-currentness analytics, AI curator, deeper personalization, expanded content) | Convert engaged users once ongoing value is proven; the free tier persists as the funnel |
+| **Stage 3 — Scale (major revenue)** | **Strong push of B2B licenses to ATOs + airlines worldwide** | Fleet-wide competency-continuity; the individual app is the trojan horse already in pilots' pockets |
 
-> Priced below LogTen/ForeFlight to signal "complement, not replacement" and lower trial friction. **Design implication:** paywall screens must sell *value* (the analytics, the AI curator, the offline vault) — never a bare feature checklist.
+> **Design implications (important for the first Figma batch):**
+> - **No paywall / no locked-feature UI at launch.** Do **not** design subscription/paywall screens for the early batch — everything is unlocked. (Screen #46 is a **later-phase** artifact.)
+> - Design so a subscription layer can be **added later without rework** — e.g., leave conceptual room for "Pro" affordances, but show nothing locked now.
+> - The **B2B/ATO** surface (fleet dashboards, instructor assignment, licensing) is a separate later product track (§13.1 Scale), not part of the consumer app's early design.
 
 ### 4.11 Go-to-market (summary)
 
-Beachhead: **A320 first officers & cadets in/after type rating** — highest anxiety about knowledge decay and the next sim, most digitally native, tight word-of-mouth cohorts. Channels: pilot communities (r/flying, Discords, forums), flight-school/type-rating partnerships, aviation influencers, ATO referrals. Hook: *"Walk into your next sim knowing you're ready — even on the things you never see on the line."*
+Beachhead: **A320 first officers & cadets in/after type rating** — highest anxiety about knowledge decay and the next sim, most digitally native, tight word-of-mouth cohorts. Channels: pilot communities (r/flying, Discords, forums), flight-school/type-rating partnerships, aviation influencers, ATO referrals. Hook: *"Walk into your next sim knowing you're ready — even on the things you never see on the line."* **Free at launch (§4.10)** removes all trial friction and maximizes this word-of-mouth loop; the resulting installed base becomes the wedge for the later **ATO/airline licensing** push.
 
 ---
 
@@ -586,7 +589,7 @@ Early release uses **4 tabs + a center FAB** (not 5) — cleaner, and it matches
 43. **AI & Trust Hub** — AI on/off, signals used, privacy boundaries, reset; reachable from every Why? *(V2)*
 44. Settings — auth/passkey, aircraft, notifications + windows, theme (incl. Pure Black / High Contrast), haptics, Eco-Mode, Focus Mode, Incognito Pause, Privacy Zones, State-Persistence/devices
 45. Training Preferences — Learning Style Profile (formats + explanation depth)
-46. Subscription / paywall — Free vs Pro, value-led (§4.10)
+46. 🔒 Subscription / paywall — *later phase; **not** in early release (launch is 100% free, §4.10)*
 47. Offline Vault — downloaded content manager *(V2)*
 48. "Coming soon" / roadmap teaser — Documents · Logbook · Career
 
@@ -788,7 +791,8 @@ Phases run **Concept → V0 → V1 → V2 → V3**, grouped by **value bundle** 
 | Rare-critical action currentness improvement | Validates the *core promise* (closing the exposure gap) | Measurable lift on EC4–EC6 items |
 | Pre-check engagement | Validates the differentiator | ≥ 60% of users with a check date open currentness before it |
 | Weak-area drill follow-through | Validates the coaching value | ≥ 30% act on a surfaced weak action/competency |
-| Free→Pro conversion | Viability | 4–8% |
+| Active user growth / word-of-mouth (referral rate) | Free-first land-grab is the Stage-1 goal (§4.10) | Strong MoM growth; viral coefficient tracked |
+| *(Later, Stage 2)* Free→paid conversion | Viability once subscription launches | 4–8% |
 
 ### 13.3 Key risks & mitigations
 
@@ -871,4 +875,4 @@ Phases run **Concept → V0 → V1 → V2 → V3**, grouped by **value bundle** 
 
 ---
 
-*End of brief v4.0. Name: **OnCourse** (§4.7). Adds the content pipeline & phased personalization (§5.9), the phased release plan (§13.1), tech stack (§14), exercise-format spec (§15), and a design-ready sample-content kit (§16); integrates all four source documents. Remaining open decisions for you: (1) pricing (§4.10); (2) content-sourcing/validation plan (§13.3, #1 risk); (3) data-ownership/privacy policy wording (§14); (4) points economy for Streak-Guard Marketplace (§13.3); (5) name-clearance checks (§4.7). The brief is now sufficient to hand to Brand, UX Research, UI Design, and Figma-generation agents — first Figma batch = the **V1/V2 core loop** (onboarding → path assignment → Flight Plan/Hero Tile → revision pool → session + feedback → light Progress), per §11.*
+*End of brief v4.1. Name: **OnCourse** (§4.7). Pricing decided: **free-first → subscription + B2B licensing** (§4.10). Includes the content pipeline & phased personalization (§5.9), phased release plan (§13.1), tech stack (§14), exercise-format spec (§15), and a design-ready sample-content kit (§16); integrates all four source documents. Remaining open decisions for you: (1) content-sourcing/validation plan (§13.3, #1 risk); (2) data-ownership/privacy policy wording (§14); (3) points economy for Streak-Guard Marketplace (§13.3); (4) name-clearance checks (§4.7). The brief is now sufficient to hand to Brand, UX Research, UI Design, and Figma-generation agents — first Figma batch = the **V1/V2 core loop** (onboarding → path assignment → Flight Plan/Hero Tile → revision pool → session + feedback → light Progress), all **unlocked/free**, per §11.*
