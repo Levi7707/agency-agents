@@ -2,7 +2,7 @@
 
 > **Document type:** Master project brief (brand → business strategy → method → product → UI/UX)
 > **Product name:** **OnCourse** *(selected; may change later, but any change is name-only — branding/colors/voice/story stay fixed. See §4.7.)*
-> **Status:** Draft v4.3 — adds §17 Prior Work / Reference (existing prototype validates the stack/data-model/palette; supersedes its light-playful look; DM Sans adopted). Plus: content governance & pilot-review (§5.10, §6.7); data-privacy stance (§14); restrained gamification (§6.4); name-clearance findings (§4.7); free-first pricing (§4.10); content pipeline & phased personalization (§5.9); phased roadmap (§13.1); tech stack (§14); exercise formats (§15); sample-content kit (§16). Name: OnCourse; full Brand Foundations (§4). Integrates four source documents (below).
+> **Status:** Draft v4.4 — adds §8.0 **as-built addendum**: the design is realized in the OnCourse Aviation Figma file (Light + Teal / Inter, 35 core screens + 4 later-phase + design-system page + wired prototype), and founder-directed changes made during design review are **canonical** over the original inventory (code-style home header with first name, Quick Test/Custom Quiz home entries, code-matched quiz layouts + Custom Quiz hero, profile-setup-first onboarding, Welcome Back screen). Earlier: §17 Prior Work; content governance (§5.10, §6.7); data privacy (§14); restrained gamification (§6.4); name clearance (§4.7); free-first pricing (§4.10); pipeline & phased personalization (§5.9); phased roadmap (§13.1); tech stack (§14); exercise formats (§15); sample-content kit (§16). Name: OnCourse. Integrates four source documents (below).
 > **Date:** 2026-06-29
 > **Primary purpose:** The single source of truth and deep-context reference for AI design agents generating high-fidelity UI/UX screens in Figma. A downstream agent should be able to read *this brief alone* and understand the full picture — strategy, the underlying training method, the complete feature system, information architecture, screens, and visual language.
 
@@ -543,7 +543,20 @@ PRE-CHECK: currentness surfaces overdue rare-critical items → drill before the
 
 ## 8. Information Architecture & Screen Inventory
 
-> **Primary build spec for Figma.** Mobile-first, **iOS primary** (390×844 / iPhone reference; Android parity via Material adaptation). **Dark-first** (§9). Operational/simple language (§5.8). A320 content, type-agnostic shell. **Batch-1 (core loop) screens are marked ⭐.**
+> **Primary build spec for Figma.** Mobile-first, **iOS primary** (390×844 / iPhone reference; Android parity via Material adaptation). **Light + teal** (§9 as-built note). Operational/simple language (§5.8). A320 content, type-agnostic shell. **Batch-1 (core loop) screens are marked ⭐.**
+
+### 8.0 As-built addendum — founder-directed changes (CANONICAL, supersede the inventory below)
+
+The design was built in the **OnCourse Aviation** Figma file (`VfD60619fgSHWnd3EtFDUg`) and reviewed live by the founder. The following founder-directed decisions are **canonical** wherever they differ from the original inventory:
+
+1. **Home ("Flight Plan") header matches the shipped app's code**: gradient **avatar tile with initial** + uppercase greeting label + **first name only** ("Maya"), with **A320 chip · streak chip (drawn flame icon) · settings** icon-buttons on the right. (Replaces the plain one-line greeting.)
+2. **Home surfaces self-directed entry points**: a **"Practice on your own"** row with **Quick Test** and **Custom Quiz** cards sits under the Today hero (replacing the "also due" list in the early release).
+3. **Custom Quiz** reproduces the shipped app's configuration layout — Number-of-questions slider (1–100), Filter (All / Weak areas / Flagged), Reference manual (FCOM/FCTM/OMA), Domain, Category, Exercise type, sticky Start bar — **plus a new "Suggested for you" hero tile** above the manual configuration.
+4. **Quick Test** reproduces the shipped app's mode picker: featured "All categories · 40 random" card + category grid with **Coming Soon** locked cells.
+5. **Onboarding starts with a quick profile setup** ("Which aircraft do you train on?" — A320 / 737 / Other-coming-soon + role chips) inserted **between Welcome and the Intent Quiz** (canvas label "02 · Profile setup").
+6. **Welcome Back (sign-in)** screen matches the shipped app: email + password, Sign In, OR divider, Continue with Google/Apple, "Create account" footer. Second prototype entry point for returning users.
+7. **Visual language is Light + Teal / Inter** per the founder's "vector — V0" reference (see §9 note); the dark direction is historical.
+8. **File organization (as-built):** pages = 📐 Design System (variable-bound tokens, type ramp, component sets) · 📱 App · Core Screens (35 screens: session + answered states, onboarding, home/engine, tabs, system, notification surfaces, streak/cold-start/offline states) · 🧭 Later Phase (Action & Competency Currentness, competency detail, Admin Review Console) · 📖 Cover & Handoff. Clickable prototype: play-first flow + returning-user flow, tab-bar navigation wired.
 
 ### 8.1 Navigation model — 4 tabs + center action *(resolved for early release)*
 
