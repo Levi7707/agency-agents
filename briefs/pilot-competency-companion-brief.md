@@ -1,8 +1,8 @@
-# Project Brief v3 — "OnCourse": The Pilot Competency-Continuity & Career Companion
+# Project Brief v3 — "OnCourse": The Pilot Competency-Continuity Method (delivered as a Career Companion)
 
 > **Document type:** Master project brief (brand → business strategy → method → product → UI/UX)
 > **Product name:** **OnCourse** *(selected; may change later, but any change is name-only — branding/colors/voice/story stay fixed. See §4.7.)*
-> **Status:** Draft v4.4 — adds §8.0 **as-built addendum**: the design is realized in the OnCourse Aviation Figma file (Light + Teal / Inter, 35 core screens + 4 later-phase + design-system page + wired prototype), and founder-directed changes made during design review are **canonical** over the original inventory (code-style home header with first name, Quick Test/Custom Quiz home entries, code-matched quiz layouts + Custom Quiz hero, profile-setup-first onboarding, Welcome Back screen). Earlier: §17 Prior Work; content governance (§5.10, §6.7); data privacy (§14); restrained gamification (§6.4); name clearance (§4.7); free-first pricing (§4.10); pipeline & phased personalization (§5.9); phased roadmap (§13.1); tech stack (§14); exercise formats (§15); sample-content kit (§16). Name: OnCourse. Integrates four source documents (below).
+> **Status:** Draft v4.5 — **positioning sharpened (founder-directed): the core product is the *Competency Continuity Method*, not the app, and it is *aircraft/type-agnostic*** (A320 is only the first content set). Propagated through §1.1/§1.2/§1.4 and the §4 brand layer (positioning statement §4.5, brand story §4.6, business model §4.10, GTM §4.11); realized on the Welcome screen (§8.0 #9). Prior v4.4 — adds §8.0 **as-built addendum**: the design is realized in the OnCourse Aviation Figma file (Light + Teal / Inter, 35 core screens + 4 later-phase + design-system page + wired prototype), and founder-directed changes made during design review are **canonical** over the original inventory (code-style home header with first name, Quick Test/Custom Quiz home entries, code-matched quiz layouts + Custom Quiz hero, profile-setup-first onboarding, Welcome Back screen). Earlier: §17 Prior Work; content governance (§5.10, §6.7); data privacy (§14); restrained gamification (§6.4); name clearance (§4.7); free-first pricing (§4.10); pipeline & phased personalization (§5.9); phased roadmap (§13.1); tech stack (§14); exercise formats (§15); sample-content kit (§16). Name: OnCourse. Integrates four source documents (below).
 > **Date:** 2026-06-29
 > **Primary purpose:** The single source of truth and deep-context reference for AI design agents generating high-fidelity UI/UX screens in Figma. A downstream agent should be able to read *this brief alone* and understand the full picture — strategy, the underlying training method, the complete feature system, information architecture, screens, and visual language.
 
@@ -58,6 +58,8 @@
 
 **OnCourse** keeps professional pilots *competent between checks*, not just *current on paper*. Line flying naturally rehearses some actions every sector (cockpit prep, briefings, approaches) while leaving rare-critical ones dormant for months (engine failure after V1, fuel leak, windshear escape, evacuation). OnCourse closes that **exposure gap** with short, spaced, scenario-based micro-training — scheduled by a method built on Evidence-Based Training (EBT) competencies and memory science. It learns each pilot's weak spots, schedules the right retrieval at the right time, and shows two honest readiness pictures: *which actions you're rusty on* and *which underlying competencies are slipping*. It is a pilot's private "personal training department in their pocket." Over time it grows into a full career companion (documents, logbook, career prep), but the MVP is the training engine.
 
+> **What the product actually *is* (founder-directed, drives all positioning):** the core product is the **Competency Continuity Method** — not the app. The app is simply how the method reaches a pilot; the defensible asset, and what we ultimately license to ATOs and airlines, is the **method** itself. It is **aircraft/type-agnostic**: the A320 is only the *first content set*, never the product's identity. Every surface leads with the method and stays type-neutral in its positioning; a pilot's specific type is applied *downstream* (at profile setup), not sold *upstream*.
+
 ### 1.2 The core insight (drives every design decision)
 
 The whole competitor market *logs the past* (LogTen, ForeFlight, CrewLounge — hours, currency, endorsements). OnCourse answers the forward-looking question pilots actually lose sleep over: **"Am I still sharp on the things I almost never do — and where am I weak?"**
@@ -78,7 +80,7 @@ Per the source method: OnCourse is a **competency-continuity and cognitive-reinf
 |---|---|---|
 | **Core job** | Maintain competency between checks via spaced, scenario-based micro-training | The whole professional life of a pilot |
 | **What's in it** | Onboarding · learning engine (SRS + adaptive + micro-quiz + NL search + AI curator) · dual currentness (action + competency) · home/Predictive Hero Tile · retention/gamification · privacy/trust · adaptive accessibility | + Documents & expiry vault · digital logbook · currency tracking · expanded AI assistant · career preparation · B2B/ATO dashboards |
-| **Aircraft** | A320 content, type-agnostic shell | Multi-type |
+| **Aircraft** | **A320 = first *content set* only**; the method, shell & positioning are type-agnostic | Multi-type content library on the same method |
 | **Feeling** | "My personal training department" | "My entire flying career, organized" |
 
 ---
@@ -169,7 +171,7 @@ A world where no pilot is ever caught rusty on the things that matter most: wher
 
 ### 4.5 Positioning statement
 
-> **For** professional pilots **who** worry about staying sharp on rare-critical actions and being ready for their next check, **OnCourse is** a personal competency-continuity companion **that** schedules short, science-based retrieval of exactly the actions line flying leaves dormant, graded against the EBT competencies airlines use — **unlike** logbook apps that only record the past, **it** is forward-looking, method-driven, and operationally real.
+> **For** professional pilots **who** worry about staying sharp on rare-critical actions and being ready for their next check, **OnCourse is** a competency-continuity **method** — delivered as a private personal app — **that** schedules short, science-based retrieval of exactly the actions line flying leaves dormant, graded against the EBT competencies airlines use — **unlike** logbook apps that only record the past, **it** is forward-looking, method-driven, and operationally real. The method is **type-agnostic** (applicable to any aircraft; the A320 content set is simply first to ship).
 
 ### 4.6 Brand story
 
@@ -187,7 +189,7 @@ A world where no pilot is ever caught rusty on the things that matter most: wher
 
 **Short form (for store listings / landing hero):**
 
-> Line flying keeps you sharp on the routine — and lets the rare-critical fade. [The app] is a personal competency-continuity companion that quietly keeps you ready on the things you almost never see, between every check. Not a logbook. Your edge.
+> Line flying keeps you sharp on the routine — and lets the rare-critical fade. OnCourse is a competency-continuity *method* that quietly keeps you ready on the things you almost never see, between every check — whatever you fly. Not a logbook. Your edge.
 
 ### 4.7 Name — decision: **OnCourse** ✅
 
@@ -234,7 +236,7 @@ Monetization is **phased**, prioritizing adoption and trust before revenue:
 |-------|-------|-----------|
 | **Stage 1 — Launch** | **100% free, fully unlocked** (no paywall, no locked features) | Land-grab in a trust-sensitive niche; remove every barrier to habit formation and word-of-mouth; build the user base and the validated content library first |
 | **Stage 2 — Growth** | **Introduce a paid subscription** as advanced features mature (dual-currentness analytics, AI curator, deeper personalization, expanded content) | Convert engaged users once ongoing value is proven; the free tier persists as the funnel |
-| **Stage 3 — Scale (major revenue)** | **Strong push of B2B licenses to ATOs + airlines worldwide** | Fleet-wide competency-continuity; the individual app is the trojan horse already in pilots' pockets |
+| **Stage 3 — Scale (major revenue)** | **Strong push of B2B licenses to ATOs + airlines worldwide** | Fleet-wide competency-continuity; the individual app is the trojan horse already in pilots' pockets. **What's licensed is the *method* (type-agnostic), not an A320 app** — so the same asset resells across every fleet an operator runs |
 
 > **Design implications (important for the first Figma batch):**
 > - **No paywall / no locked-feature UI at launch.** Do **not** design subscription/paywall screens for the early batch — everything is unlocked. (Screen #46 is a **later-phase** artifact.)
@@ -243,7 +245,7 @@ Monetization is **phased**, prioritizing adoption and trust before revenue:
 
 ### 4.11 Go-to-market (summary)
 
-Beachhead: **A320 first officers & cadets in/after type rating** — highest anxiety about knowledge decay and the next sim, most digitally native, tight word-of-mouth cohorts. Channels: pilot communities (r/flying, Discords, forums), flight-school/type-rating partnerships, aviation influencers, ATO referrals. Hook: *"Walk into your next sim knowing you're ready — even on the things you never see on the line."* **Free at launch (§4.10)** removes all trial friction and maximizes this word-of-mouth loop; the resulting installed base becomes the wedge for the later **ATO/airline licensing** push.
+Beachhead: **A320 first officers & cadets in/after type rating** — highest anxiety about knowledge decay and the next sim, most digitally native, tight word-of-mouth cohorts. *(The A320 beachhead is a **content-availability** starting point, not the product's scope — the method is type-agnostic and the content library expands by type; positioning never narrows to one manufacturer.)* Channels: pilot communities (r/flying, Discords, forums), flight-school/type-rating partnerships, aviation influencers, ATO referrals. Hook: *"Walk into your next sim knowing you're ready — even on the things you never see on the line."* **Free at launch (§4.10)** removes all trial friction and maximizes this word-of-mouth loop; the resulting installed base becomes the wedge for the later **ATO/airline licensing** push.
 
 ---
 
