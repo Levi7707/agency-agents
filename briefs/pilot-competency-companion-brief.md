@@ -557,6 +557,7 @@ The design was built in the **OnCourse Aviation** Figma file (`VfD60619fgSHWnd3E
 6. **Welcome Back (sign-in)** screen matches the shipped app: email + password, Sign In, OR divider, Continue with Google/Apple, "Create account" footer. Second prototype entry point for returning users.
 7. **Visual language is Light + Teal / Inter** per the founder's "vector — V0" reference (see §9 note); the dark direction is historical.
 8. **File organization (as-built):** pages = 📐 Design System (variable-bound tokens, type ramp, component sets) · 📱 App · Core Screens (35 screens: session + answered states, onboarding, home/engine, tabs, system, notification surfaces, streak/cold-start/offline states) · 🧭 Later Phase (Action & Competency Currentness, competency detail, Admin Review Console) · 📖 Cover & Handoff. Clickable prototype: play-first flow + returning-user flow, tab-bar navigation wired.
+9. **Welcome-screen trust-proof block (from the persona-walkthrough audit):** the Welcome (Zero-Login) screen carries a three-row credibility/reassurance block above the CTA — ✓ *Sourced from official A320 documentation* · ✓ *Written & reviewed by professional pilots* · ✓ *Private by default — never shared with your airline*. Rationale: surface the authority + privacy proof at the first anxious moment (fold 2) rather than only at the play-first tutorial (fold 5); ties to §5.10 (pilot review) and the privacy promise (§2/§4). Keep this proof at first contact in any redesign.
 
 ### 8.1 Navigation model — 4 tabs + center action *(resolved for early release)*
 
