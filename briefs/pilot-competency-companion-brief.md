@@ -396,7 +396,7 @@ Parallel "Revision Pools" database  ──►  pushed into the app's dedicated s
 | Content | Pre-assembled, fully validated pools | Engine-assembled from the validated bank |
 
 > **Design implications (critical for the first Figma batch):**
-> - Design the **Flight Plan** surface around **"your path → today's revision pool → do it."** A **path** is a named, recurring program (e.g. *"Sharp FO — Systems & Abnormals"*); a pilot has **one active path** at a time.
+> - Design the **Flight Plan** surface around **"your path → today's revision pool → do it."** A **path** is a named, recurring program (e.g. *"Sharp — Systems & Abnormals"*); a pilot has **one active path** at a time.
 > - Onboarding needs a **path-assignment moment** ("Based on your answers, your OnCourse path is …") — honest, not over-claiming AI.
 > - Early-release **status is light** (path progress, pool completion, streak, due count). **Do not** design the full competency radar as an early-release screen — mark it a **later-phase** view.
 > - Keep the **self-directed Train** mode visibly separate from the engine-pushed Flight Plan, so "what OnCourse tells me to do" ≠ "what I chose to poke at."
@@ -561,7 +561,7 @@ The design was built in the **OnCourse Aviation** Figma file (`VfD60619fgSHWnd3E
 8. **File organization (as-built):** pages = 📐 Design System (variable-bound tokens, type ramp, component sets) · 📱 App · Core Screens (**38 screens**: session + answered states, onboarding incl. Disclaimer, home/engine incl. Why? sheet, tabs, NL Search, system, notification surfaces, streak/cold-start/offline states) · 🧭 Later Phase (Action & Competency Currentness, competency detail, Admin Review Console) · 📖 Cover & Handoff. Clickable prototype: play-first flow + returning-user flow, tab-bar navigation, **54 wired connections** (see item 10).
 9. **Welcome-screen positioning — the METHOD is the product, aircraft-agnostic (founder-directed, CANONICAL):** the first screen leads with the competency-continuity **method** as the product (not "the app") and is **not associated with Airbus/A320**. As-built copy — headline *"A proven method to stay current."*; subcopy *"OnCourse is built on a structured competency-continuity method — a few focused minutes a day keep professional pilots sharp, whatever you fly."*; three trust pillars ✓ *Type-agnostic by design — fits any aircraft* · ✓ *Sourced from official documentation, reviewed by pilots* · ✓ *Private by default — never shared with your airline*. The trust block was added from the persona-walkthrough audit (surface authority + privacy at fold 2, not only at the fold-5 tutorial; ties to §5.10 and the privacy promise). **Positioning rule for all surfaces & the brief's brand layer:** the hero is the *method* (aircraft/type-agnostic); A320 is only the *first content set* applied downstream via profile setup — never lead with a single manufacturer or type. Keep the method-first, type-agnostic framing and this proof at first contact in any redesign.
 10. **V1 gap closure — three screens built + prototype fully wired:** the three remaining ⭐ V1 gaps are now built on Core Screens — **01b · Disclaimer (Before you start)** (#43, the §1.3 founder hard requirement; inserted Welcome → Disclaimer → Profile setup), **Why? sheet (over Flight Plan)** (#11; opened from the hero's "next in your path" chip; exits: Got-it→Revision Pool, AI-link→AI & Trust Hub, pick-another→Home), and **Search · Natural language** (#23; reached from the Intent-Quiz "Search instead" link and from Train's search entry; Start→session). The clickable prototype now has **54 wired connections** (was 37): also wired in this pass — Welcome "I already have an account"→Welcome Back, Quick-tour skip→Goal setting, First-session **Explore**→Home and **Build my own**→Train, Home path-strip→Path Detail, Profile→AI & Trust Hub, and Session Summary "Save your progress" (new secondary link)→Value & Sign-up→Home. Cover count updated to 38 app screens.
-11. **Expert-fast-path affordances (from the David/Sam persona walkthrough):** onboarding now offers two secondary links so the flow serves experts (Capt. David) without hurting the anxious beachhead (Maya) — a *"Skip the tour — I know the formats"* link under Start on **Quick tour**, and a *"Know exactly what you need? Search instead"* link under Continue on the **Intent Quiz** (deep-links to Train / natural-language search). Also from that audit and applied: the positioning-copy sweep removed hardcoded "A320" from narrative onboarding copy (Quick tour, Value & Sign-up) and the Cover subtitle now reads "Method" (aircraft mentions remain only as *content*: aircraft chips, profile data, category tags, profile-setup picker). **Deferred (founder to decide):** rank-neutral path naming — the assigned path is still literally *"Sharp FO — Systems & Abnormals"* even after a user selects the **Captain** role at profile setup; the walkthrough flagged this as the highest-severity mismatch for non-FO ranks (see persona findings R-1).
+11. **Expert-fast-path affordances (from the David/Sam persona walkthrough):** onboarding now offers two secondary links so the flow serves experts (Capt. David) without hurting the anxious beachhead (Maya) — a *"Skip the tour — I know the formats"* link under Start on **Quick tour**, and a *"Know exactly what you need? Search instead"* link under Continue on the **Intent Quiz** (deep-links to Train / natural-language search). Also from that audit and applied: the positioning-copy sweep removed hardcoded "A320" from narrative onboarding copy (Quick tour, Value & Sign-up) and the Cover subtitle now reads "Method" (aircraft mentions remain only as *content*: aircraft chips, profile data, category tags, profile-setup picker). **R-1 applied (founder-approved):** path names are **rank-neutral** — *"Sharp — Systems & Abnormals"* (was "Sharp FO —"), updated across all screens (Path Assignment, Home strip, Path Detail, Progress, Day-0/Offline variants, Why? sheet) and throughout this brief; fixes the walkthrough's highest-severity mismatch (a Captain being handed an "FO" path). A future enhancement may make names role-aware (FO/Captain/Cadet variants) using the role collected at profile setup.
 
 ### 8.1 Navigation model — 4 tabs + center action *(resolved for early release)*
 
@@ -585,7 +585,7 @@ Early release uses **4 tabs + a center FAB** (not 5) — cleaner, and it matches
 3. ⭐ Predictive Intent Quiz — 3 visual cards (limitations / memory items / systems / performance…) — *drives path routing*
 4. ⭐ Play-First Tutorial — one sample per exercise type (flashcard, cloze, MCQ, true/false, drag-drop), each a different subject
 5. ⭐ Dynamic Goal Setting — commitment level (e.g. 1 min/day · 4×/week · intensive)
-6. ⭐ **Path Assignment** — "Based on your answers, your OnCourse path is **[e.g. 'Sharp FO — Systems & Abnormals']**" — the routed path (1 of 3–4); honest, no AI over-claim; option to view/switch path
+6. ⭐ **Path Assignment** — "Based on your answers, your OnCourse path is **[e.g. 'Sharp — Systems & Abnormals']**" — the routed path (1 of 3–4); honest, no AI over-claim; option to view/switch path
 7. ⭐ First-Session Choice — Explore / Quick Start / Build My Own Path
 8. ⭐ Passkey / account creation (offered *after* first value)
 
@@ -654,7 +654,7 @@ Early release uses **4 tabs + a center FAB** (not 5) — cleaner, and it matches
 The home surface. Answer in one glance, top → bottom: *what do I do right now, and how's my path going.*
 
 1. **Greeting + identity strip** — "Good morning, Maya" · aircraft chip (A320) · streak (🔥 12).
-2. **Active-path strip** — the routed path name ("Sharp FO — Systems & Abnormals") + progress (e.g. "Week 3 · 62%"). Tap → Path detail (#12).
+2. **Active-path strip** — the routed path name ("Sharp — Systems & Abnormals") + progress (e.g. "Week 3 · 62%"). Tap → Path detail (#12).
 3. **Predictive Hero Tile (hero):** today's top revision pool, large and tappable:
    - Title: the pool ("Today: Hydraulics & abnormal config — 8 items").
    - Time budget ("≈ 4 min") and progress if resuming.
@@ -909,7 +909,7 @@ Phases run **Concept → V0 → V1 → V2 → V3**, grouped by **value bundle** 
 > Realistic, A320-appropriate examples so hi-fi screens look like a real product — **not** lorem ipsum. *(Content is illustrative for design; production content must pass pilot/expert validation, §13.3.)*
 
 **Sample training paths (Release 1 — pick one to feature in mockups):**
-- **"Sharp FO — Systems & Abnormals"** — hydraulics, electrical, abnormal config; balances routine traps + rare-critical drills.
+- **"Sharp — Systems & Abnormals"** — hydraulics, electrical, abnormal config; balances routine traps + rare-critical drills.
 - **"Command Prep — Decision & Non-Normals"** — decision-heavy scenarios (fuel leak, diversion, RTO).
 - **"Winter Ops Ready"** — seasonal: de-icing, contaminated runway, LVO.
 
@@ -925,7 +925,7 @@ Phases run **Concept → V0 → V1 → V2 → V3**, grouped by **value bundle** 
 5. **Drag-drop / order** (`INST_ORDER`) — *"Put the emergency electrical power supply sequence (loss of main generators) in the correct order:"* · Items to sequence: RAT deploys → EMER GEN online → AC/DC ESS restored → shed non-essential loads · Tag: `PRO/SAW`.
 
 **Sample light-status data (early release — for Flight Plan / Progress mockups):**
-- Streak: **🔥 12 days** · Path: **"Sharp FO — Systems & Abnormals" · Week 3 · 62%** · Pools completed this week: **4 / 6** · Due now: **1 pool (8 items)**.
+- Streak: **🔥 12 days** · Path: **"Sharp — Systems & Abnormals" · Week 3 · 62%** · Pools completed this week: **4 / 6** · Due now: **1 pool (8 items)**.
 
 **Cold-start states (day 0 → day 7):**
 - **Day 0 (post-onboarding):** no history — Flight Plan shows the assigned path + first pool; status row reads *"Your picture builds as you train."* No radar, no streak yet.
