@@ -1022,7 +1022,9 @@ Cognitive walkthroughs simulating each persona's reactions fold-by-fold (LIFT / 
 
 ### 18.6 Prototype navigation map
 
-A live-verified, page-by-page **navigation map** (HTML reference + hosted artifact) documents all **54 wired taps**, the **2 entry points**, and flags **4 landing screens** with no onward taps yet wired (Path Detail, Streak, Settings, AI & Trust Hub). Solid = wired; the map doubles as the prototype-wiring record.
+A live-verified, page-by-page **navigation map** documents all **54 wired taps**, the **2 entry points**, and flags **4 landing screens** with no onward taps yet wired (Path Detail, Streak, Settings, AI & Trust Hub). Each screen is a card listing its outbound taps; every destination is a clickable chip that jumps to that screen. The map doubles as the prototype-wiring record.
+
+> 📄 **Navigation map (version-controlled):** [`oncourse-navigation-map.html`](./oncourse-navigation-map.html) — open in any browser; theme-aware (light/dark), self-contained, no login required. Regenerate/verify from the Figma prototype's wired reactions if screens change.
 
 ### 18.7 Status & what remains (all optional polish / later-phase)
 

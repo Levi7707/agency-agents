@@ -1,0 +1,219 @@
+<title>OnCourse — Navigation Map</title>
+<style>
+  :root{
+    --bg:#f4f6f7; --surface:#ffffff; --surface-2:#f7fafa;
+    --ink:#0c1a24; --muted:#566873; --faint:#8a99a1; --line:#e2e7e9;
+    --teal:#0e9594; --teal-tint:#eaf5f4; --teal-ink:#0a6b6a;
+    --amber:#b9701a; --amber-tint:#fbf0e2;
+    --shadow:0 1px 2px rgba(12,26,36,.05),0 8px 24px rgba(12,26,36,.06);
+    --radius:16px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0a1317; --surface:#12212b; --surface-2:#0f1c24;
+      --ink:#e9f2f3; --muted:#9db0b9; --faint:#5f7a85; --line:#22333d;
+      --teal:#2cc5c1; --teal-tint:#0f2a2c; --teal-ink:#83e2df;
+      --amber:#e0a55e; --amber-tint:#221a10;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#f4f6f7; --surface:#ffffff; --surface-2:#f7fafa;
+    --ink:#0c1a24; --muted:#566873; --faint:#8a99a1; --line:#e2e7e9;
+    --teal:#0e9594; --teal-tint:#eaf5f4; --teal-ink:#0a6b6a;
+    --amber:#b9701a; --amber-tint:#fbf0e2;
+    --shadow:0 1px 2px rgba(12,26,36,.05),0 8px 24px rgba(12,26,36,.06);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0a1317; --surface:#12212b; --surface-2:#0f1c24;
+    --ink:#e9f2f3; --muted:#9db0b9; --faint:#5f7a85; --line:#22333d;
+    --teal:#2cc5c1; --teal-tint:#0f2a2c; --teal-ink:#83e2df;
+    --amber:#e0a55e; --amber-tint:#221a10;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:40px 24px 80px}
+  .eyebrow{font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--teal-ink); margin:0}
+  h1{font-size:clamp(28px,4vw,40px); font-weight:800; letter-spacing:-.02em; margin:.28em 0 .2em; text-wrap:balance}
+  .lede{color:var(--muted); max-width:64ch; font-size:16px; margin:0}
+
+  .stats{display:flex; flex-wrap:wrap; gap:10px; margin:24px 0 6px}
+  .stat{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:9px 15px; box-shadow:var(--shadow)}
+  .stat b{font-size:20px; font-variant-numeric:tabular-nums; display:block; letter-spacing:-.01em}
+  .stat span{font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:.08em}
+
+  .legend{display:flex; flex-wrap:wrap; gap:10px 18px; margin:20px 0 4px; font-size:13px; color:var(--muted); align-items:center}
+  .legend span{display:inline-flex; align-items:center; gap:7px}
+
+  .spine-shell{margin:32px 0 6px}
+  .spine-shell h2{font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin:0 0 12px}
+  .spine{display:flex; align-items:stretch; overflow-x:auto; padding-bottom:12px}
+  .spine a{flex:0 0 auto; text-decoration:none}
+  .node{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:9px 13px; box-shadow:var(--shadow); min-width:118px; height:100%}
+  .node.hubnode{border-color:var(--teal); box-shadow:0 0 0 2px var(--teal-tint),var(--shadow)}
+  .node .k{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px; color:var(--teal-ink); font-weight:600}
+  .node .n{font-size:13px; font-weight:600; color:var(--ink); white-space:nowrap}
+  .seg{display:flex; align-items:center; color:var(--teal); font-weight:700; padding:0 7px; flex:0 0 auto}
+
+  .group{margin-top:42px}
+  .group>h2{font-size:15px; font-weight:800; letter-spacing:.01em; margin:0 0 5px; display:flex; align-items:center; gap:12px}
+  .group>h2 .rule{height:1px; background:var(--line); flex:1}
+  .group>p{margin:0 0 18px; color:var(--muted); font-size:13.5px; max-width:75ch}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(296px,1fr)); gap:16px; align-items:start}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:15px 16px 6px; scroll-margin-top:16px; transition:box-shadow .3s,border-color .3s}
+  .card.flash{border-color:var(--teal); box-shadow:0 0 0 3px var(--teal-tint),var(--shadow)}
+  .card .top{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+  .card .code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; font-weight:700; color:var(--teal-ink); flex:0 0 auto}
+  .card h3{font-size:15.5px; font-weight:700; letter-spacing:-.01em; margin:0; line-height:1.25}
+  .tags{display:flex; flex-wrap:wrap; gap:5px; margin:9px 0 4px; min-height:18px}
+  .badge{font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 7px; border-radius:6px; line-height:1.05}
+  .badge.entry{background:var(--teal); color:#fff}
+  .badge.new{background:var(--teal-tint); color:var(--teal-ink); border:1px solid var(--teal)}
+  .badge.hub{background:transparent; color:var(--muted); border:1px solid var(--line)}
+  .badge.state,.badge.overlay{background:var(--amber-tint); color:var(--amber); border:1px solid var(--amber)}
+
+  ul.links{list-style:none; margin:8px 0 0; padding:0; border-top:1px solid var(--line)}
+  ul.links li{display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; padding:9px 0; border-bottom:1px solid var(--line); font-size:13px}
+  .tap{color:var(--muted); flex:1 1 130px; min-width:0; overflow-wrap:anywhere}
+  .arrow{color:var(--teal); font-weight:700; flex:0 0 auto}
+  a.dest{flex:0 0 auto; text-decoration:none; background:var(--teal-tint); color:var(--teal-ink);
+    border:1px solid transparent; padding:4px 10px; border-radius:999px; font-weight:600; font-size:12px; white-space:nowrap; transition:border-color .15s}
+  a.dest:hover,a.dest:focus-visible{border-color:var(--teal); outline:none}
+  .leaf-note{color:var(--faint); font-size:12.5px; padding:12px 0; border-top:1px solid var(--line)}
+
+  .footnote{margin-top:44px; padding:18px 20px; background:var(--surface-2); border:1px solid var(--line); border-radius:14px; color:var(--muted); font-size:13px; line-height:1.6}
+  .footnote b{color:var(--ink)}
+  a.jump{color:var(--teal-ink); text-decoration:none; font-weight:600}
+  a.jump:hover{text-decoration:underline}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important} html{scroll-behavior:auto}}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">OnCourse Aviation · Prototype</p>
+  <h1>Navigation Map</h1>
+  <p class="lede">Every screen already in the file, and exactly where each tap lands. Click any destination chip to jump to that screen's own outbound list — the way you'd walk the prototype, page after page.</p>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="legend">
+    <span><span class="badge entry">Entry</span> prototype starts here</span>
+    <span><span class="badge new">New</span> built in the latest pass</span>
+    <span><span class="badge hub">Hub</span> tab-bar screen</span>
+    <span><span class="badge state">State / Overlay</span> variant of another screen</span>
+  </div>
+
+  <div class="spine-shell">
+    <h2>First-run spine — the linear onboarding order</h2>
+    <div class="spine" id="spine"></div>
+  </div>
+
+  <div id="groups"></div>
+
+  <div class="footnote">
+    <b>Reading the map.</b> Arrows show <em>wired</em> prototype taps only. The four tab-bar screens (Flight&nbsp;Plan · Train · Progress · Profile) all reach each other; those links are listed under each. Four screens are <b>landing screens</b> — reachable, but with no onward taps wired yet: <a class="jump" href="#path-detail">Path Detail</a>, <a class="jump" href="#streak">Streak</a>, <a class="jump" href="#settings">Settings</a>, <a class="jump" href="#ai-trust">AI&nbsp;&amp;&nbsp;Trust Hub</a>. <b>Not shown</b> (not part of the interactive flow): the answered-state specimens (Flashcard revealed, True/False answered, Cloze checked, Drag-drop checked), the three micro-quiz surfaces, and the four later-phase screens. Verified live against the Figma prototype — 54 wired reactions.
+  </div>
+</div>
+
+<script>
+const SHORT = {
+  welcome:"01 · Welcome", disclaimer:"01b · Disclaimer", "profile-setup":"00 · Profile setup",
+  "intent-quiz":"02 · Intent Quiz", "quick-tour":"03 · Quick tour", goal:"04 · Goal setting",
+  "path-assignment":"05 · Path Assignment", "first-session":"06 · First-session", "welcome-back":"Welcome Back",
+  home:"★ Flight Plan", "revision-pool":"Revision Pool", mcq:"Session", "session-summary":"Session Summary",
+  "value-signup":"07 · Value & Sign-up", "why-sheet":"Why? sheet", train:"Train", "quick-test":"Quick Test",
+  "custom-quiz":"Custom Quiz", "nl-search":"Search", progress:"Progress", profile:"Profile",
+  "path-detail":"Path Detail", streak:"Streak", settings:"Settings", "ai-trust":"AI & Trust",
+  day0:"Flight Plan · Day 0", offline:"Flight Plan · Offline"
+};
+const SCREENS = [
+  {g:"Onboarding", id:"welcome", code:"01", name:"Welcome (Zero-Login)", tags:["entry"], edges:[["Try it now — no sign-up","disclaimer"],["I already have an account","welcome-back"]]},
+  {g:"Onboarding", id:"disclaimer", code:"01b", name:"Disclaimer — Before you start", tags:["new"], edges:[["I understand — continue","profile-setup"]]},
+  {g:"Onboarding", id:"profile-setup", code:"00", name:"Profile setup (aircraft + role)", tags:[], edges:[["Continue","intent-quiz"]]},
+  {g:"Onboarding", id:"intent-quiz", code:"02", name:"Intent Quiz", tags:[], edges:[["Continue","quick-tour"],["Search instead","nl-search"]]},
+  {g:"Onboarding", id:"quick-tour", code:"03", name:"Quick tour (play-first)", tags:[], edges:[["Start","goal"],["Skip the tour","goal"]]},
+  {g:"Onboarding", id:"goal", code:"04", name:"Goal setting", tags:[], edges:[["Continue","path-assignment"]]},
+  {g:"Onboarding", id:"path-assignment", code:"05", name:"Path Assignment", tags:[], edges:[["Start my path","first-session"]]},
+  {g:"Onboarding", id:"first-session", code:"06", name:"First-session choice", tags:[], edges:[["Quick Start (recommended)","home"],["Explore on your own","home"],["Build my own path","train"]]},
+  {g:"Onboarding", id:"welcome-back", code:"↩", name:"Welcome Back (Sign in)", tags:["entry"], edges:[["Sign In","home"]]},
+
+  {g:"The daily loop", id:"home", code:"★", name:"Flight Plan · Home", tags:["hub"], edges:[["Today's pool · Start","revision-pool"],["Why? · next in your path","why-sheet"],["Active-path strip","path-detail"],["Quick Test card","quick-test"],["Custom Quiz card","custom-quiz"],["Streak chip","streak"],["Settings icon","settings"],["Tab · Train","train"],["Tab · Progress","progress"],["Tab · Profile","profile"]]},
+  {g:"The daily loop", id:"revision-pool", code:"", name:"Revision Pool", tags:[], edges:[["Start","mcq"]]},
+  {g:"The daily loop", id:"mcq", code:"", name:"Session · MCQ (+ 4 other types)", tags:[], edges:[["Answer / continue","session-summary"]]},
+  {g:"The daily loop", id:"session-summary", code:"", name:"Session Summary", tags:[], edges:[["Back to Flight Plan","home"],["Save your progress","value-signup"]]},
+  {g:"The daily loop", id:"value-signup", code:"07", name:"Value & Sign-up", tags:[], edges:[["Create a free account","home"],["Keep exploring","home"]]},
+  {g:"The daily loop", id:"why-sheet", code:"", name:"Why? sheet (over Flight Plan)", tags:["new","overlay"], edges:[["Got it — start","revision-pool"],["How OnCourse decides","ai-trust"],["Pick another due pool","home"]]},
+
+  {g:"Self-directed & search", id:"train", code:"", name:"Train", tags:["hub"], edges:[["Search a topic","nl-search"],["Tab · Flight Plan","home"],["Tab · Progress","progress"],["Tab · Profile","profile"]]},
+  {g:"Self-directed & search", id:"quick-test", code:"", name:"Quick Test", tags:[], edges:[["All categories · 40 random","mcq"]]},
+  {g:"Self-directed & search", id:"custom-quiz", code:"", name:"Custom Quiz", tags:[], edges:[["Start suggested session","mcq"],["Start Quiz","mcq"]]},
+  {g:"Self-directed & search", id:"nl-search", code:"", name:"Search · Natural language", tags:["new"], edges:[["Start this quiz","mcq"]]},
+
+  {g:"Tabs & system", id:"progress", code:"", name:"Progress", tags:["hub"], edges:[["Tab · Flight Plan","home"],["Tab · Train","train"],["Tab · Profile","profile"]]},
+  {g:"Tabs & system", id:"profile", code:"", name:"Profile", tags:["hub"], edges:[["AI & Trust row","ai-trust"],["Tab · Flight Plan","home"],["Tab · Train","train"],["Tab · Progress","progress"]]},
+  {g:"Tabs & system", id:"path-detail", code:"", name:"Path Detail", tags:[], edges:[], leaf:true},
+  {g:"Tabs & system", id:"streak", code:"", name:"Streak", tags:[], edges:[], leaf:true},
+  {g:"Tabs & system", id:"settings", code:"", name:"Settings", tags:[], edges:[], leaf:true},
+  {g:"Tabs & system", id:"ai-trust", code:"", name:"AI & Trust Hub", tags:[], edges:[], leaf:true},
+
+  {g:"Home states", id:"day0", code:"", name:"Flight Plan — Day 0 (cold start)", tags:["state"], edges:[["Start your first session","revision-pool"],["Quick Test","quick-test"],["Custom Quiz","custom-quiz"]]},
+  {g:"Home states", id:"offline", code:"", name:"Flight Plan — Offline", tags:["state"], edges:[["Start (from vault)","revision-pool"],["Quick Test","quick-test"],["Custom Quiz","custom-quiz"]]},
+];
+
+const totalTaps = 54;
+const leafs = SCREENS.filter(s=>s.leaf).length;
+document.getElementById("stats").innerHTML = [
+  [SCREENS.length, "screens in the flow"],
+  [totalTaps, "wired taps"],
+  ["2", "entry points"],
+  [leafs, "landing screens"],
+].map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+
+const SPINE = ["welcome","disclaimer","profile-setup","intent-quiz","quick-tour","goal","path-assignment","first-session","home"];
+document.getElementById("spine").innerHTML = SPINE.map((id,i)=>{
+  const s = SCREENS.find(x=>x.id===id);
+  const hub = id==="home";
+  const nm = s.name.split(" (")[0].replace(" — Before you start","").replace(" · Home","");
+  const node = `<a href="#${id}"><div class="node${hub?" hubnode":""}"><div class="k">${s.code||"●"}</div><div class="n">${nm}</div></div></a>`;
+  return node + (i<SPINE.length-1 ? `<div class="seg">→</div>` : "");
+}).join("");
+
+const order = ["Onboarding","The daily loop","Self-directed & search","Tabs & system","Home states"];
+const blurb = {
+  "Onboarding":"Two ways in — a first-time pilot (Welcome) or a returning one (Welcome Back). The spine above is the happy path.",
+  "The daily loop":"The core habit: land on Flight Plan, do the pushed pool, see what improved, come back. The Why? sheet explains the engine's pick.",
+  "Self-directed & search":"The pull side — pilots choosing what to drill instead of following the pushed path.",
+  "Tabs & system":"The four-tab spine plus the screens it opens. The last four are landing screens with no onward taps wired yet.",
+  "Home states":"Variants of Flight Plan for a brand-new account and for offline — same actions, different context.",
+};
+document.getElementById("groups").innerHTML = order.map(g=>{
+  const cards = SCREENS.filter(s=>s.g===g).map(s=>{
+    const tags = s.tags.map(t=>`<span class="badge ${t}">${t}</span>`).join("");
+    const body = s.leaf
+      ? `<div class="leaf-note">Landing screen — no onward taps wired yet.</div>`
+      : `<ul class="links">`+s.edges.map(([tap,to])=>
+          `<li><span class="tap">${tap}</span><span class="arrow">→</span><a class="dest" href="#${to}">${SHORT[to]}</a></li>`
+        ).join("")+`</ul>`;
+    return `<div class="card" id="${s.id}">
+      <div class="top">${s.code?`<span class="code">${s.code}</span>`:""}<h3>${s.name}</h3></div>
+      <div class="tags">${tags}</div>
+      ${body}</div>`;
+  }).join("");
+  return `<section class="group"><h2>${g}<span class="rule"></span></h2><p>${blurb[g]}</p><div class="grid">${cards}</div></section>`;
+}).join("");
+
+function flash(){
+  const id = decodeURIComponent(location.hash.slice(1)); if(!id) return;
+  const el = document.getElementById(id); if(!el) return;
+  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+  setTimeout(()=>el.classList.remove("flash"), 1500);
+}
+addEventListener("hashchange", flash); addEventListener("load", flash);
+</script>
